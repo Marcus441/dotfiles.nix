@@ -11,31 +11,50 @@ _: let
     modified = "~";
     untracked = "+";
     upToDate = "✔";
-    readOnly = " ";
+    readOnly = " ";
   };
 in {
   flake.modules.homeManager.core = {config, ...}: let
     inherit (config.desktop) colorsRgb;
   in {
     programs.bash.initExtra = ''
-      # OSC 7: report the cwd, so a new window opens in it.
-      __osc7_cwd() { printf '\e]7;file://%s%s\e\\' "''${HOSTNAME:-$(hostname)}" "$PWD"; }
+      # OSC 7: report the cwd, so a new window opens in it. The path is
+      # percent-encoded: a raw directory name could end the sequence early
+      # and send escapes of its own.
+      __osc7_cwd() {
+        local LC_ALL=C p=$PWD out="" c i
+        for (( i = 0; i < ''${#p}; i++ )); do
+          c=''${p:i:1}
+          case $c in
+            [-/._~A-Za-z0-9]) out+=$c ;;
+            *) printf -v c '%%%02X' "'$c"; out+=$c ;;
+          esac
+        done
+        printf '\e]7;file://%s%s\e\\' "''${HOSTNAME:-$(hostname)}" "$out"
+      }
 
-      # Prompt: cwd, git branch, dev environment, and a "$" sigil.
+      # Prompt: cwd, git branch, dev environment, and a "$" sigil. PS1
+      # names the branch and environment variables instead of embedding
+      # their values: bash expands PS1 again on display, so a branch
+      # called $(cmd) would run cmd.
       __prompt() {
         # Must be the first statement: anything else overwrites $?.
         local code=$?
-        local branch env=""
-        branch=$(command git symbolic-ref --quiet --short HEAD 2>/dev/null)
+        local venv
+        __prompt_branch=$(command git symbolic-ref --quiet --short HEAD 2>/dev/null)
+        __prompt_env=""
         if [[ -n $DEVENV_ROOT ]]; then
-          env="devenv"
+          __prompt_env="devenv"
         elif [[ -n $IN_NIX_SHELL ]]; then
-          env="nix"
+          __prompt_env="nix"
         fi
-        [[ -n $VIRTUAL_ENV ]] && env="''${env:+$env,}venv:''${VIRTUAL_ENV##*/}"
+        if [[ -n $VIRTUAL_ENV ]]; then
+          venv=''${VIRTUAL_ENV##*/}
+          __prompt_env="''${__prompt_env:+$__prompt_env,}venv:''${venv//[[:cntrl:]]/?}"
+        fi
         PS1='\[\e[1;38;2;${colorsRgb.${slot.cwd}}m\]\w\[\e[0m\]'
-        [[ -n $branch ]] && PS1+=" \[\e[38;2;${colorsRgb.${slot.git}}m\]git:$branch\[\e[0m\]"
-        [[ -n $env ]] && PS1+=" \[\e[38;2;${colorsRgb.${slot.env}}m\]($env)\[\e[0m\]"
+        [[ -n $__prompt_branch ]] && PS1+=' \[\e[38;2;${colorsRgb.${slot.git}}m\]git:''${__prompt_branch}\[\e[0m\]'
+        [[ -n $__prompt_env ]] && PS1+=' \[\e[38;2;${colorsRgb.${slot.env}}m\](''${__prompt_env})\[\e[0m\]'
         local sigil="${colorsRgb.${slot.ok}}"
         [[ $code -ne 0 ]] && sigil="${colorsRgb.${slot.err}}"
         PS1+=" \[\e[38;2;''${sigil}m\]\\\$\[\e[0m\] "
@@ -63,8 +82,10 @@ in {
         local conflicted="" modified="" untracked=""
         local -i ahead=0 behind=0 upstream=0 inrepo=0
 
-        if out=$(command git --no-optional-locks status \
-                   --porcelain=v2 --branch 2>/dev/null); then
+        # core.fsmonitor names a command for status to run: never take it
+        # from the config of whatever repo the cwd is in.
+        if out=$(command git -c core.fsmonitor=false --no-optional-locks \
+                   status --porcelain=v2 --branch 2>/dev/null); then
           inrepo=1
           for line in ''${(f)out}; do
             case $line in
@@ -101,6 +122,9 @@ in {
         fi
         local -a parts=( ''${(s:/:)dir} )
         (( $#parts > 2 )) && dir="…/''${(j:/:)parts[-2,-1]}"
+        # Control characters in a directory name would reach the terminal
+        # as escapes: show them as "?".
+        dir=''${dir//[[:cntrl:]]/?}
 
         if (( upstream )); then
           if (( ahead && behind )); then
@@ -120,7 +144,7 @@ in {
         elif [[ -n $IN_NIX_SHELL ]]; then
           env="nix"
         fi
-        [[ -n $VIRTUAL_ENV ]] && env="''${env:+$env,}venv:''${VIRTUAL_ENV##*/}"
+        [[ -n $VIRTUAL_ENV ]] && env="''${env:+$env,}venv:''${''${VIRTUAL_ENV##*/}//[[:cntrl:]]/?}"
 
         if (( __prompt_topline )); then
           __prompt_topline=0
@@ -162,8 +186,15 @@ in {
       }
       add-zsh-hook preexec __prompt_preexec
 
-      # OSC 7: report the cwd, so a new window opens in it.
-      __osc7_cwd() { printf '\e]7;file://%s%s\e\\' "$HOST" "$PWD"; }
+      # OSC 7: report the cwd, so a new window opens in it. The path is
+      # percent-encoded: a raw directory name could end the sequence early
+      # and send escapes of its own.
+      __osc7_cwd() {
+        emulate -L zsh -o extended_glob
+        local LC_ALL=C
+        printf '\e]7;file://%s%s\e\\' "$HOST" \
+          "''${PWD//(#m)[^-\/._~A-Za-z0-9]/%''${(l:2::0:)$(( [##16] #MATCH ))}}"
+      }
       add-zsh-hook precmd __osc7_cwd
     '';
   };
