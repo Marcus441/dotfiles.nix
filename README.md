@@ -130,7 +130,7 @@ A host then imports `<wm>` in place of `dwl` in both of its aspect lists.
    then clone this repository:
 
    ```bash
-   git clone https://github.com/Marcus441/nixos-dotfiles.git ~/.dotfiles/flake
+   git clone https://github.com/Marcus441/dotfiles.nix.git ~/.dotfiles/flake
    cd ~/.dotfiles/flake
    ```
 
