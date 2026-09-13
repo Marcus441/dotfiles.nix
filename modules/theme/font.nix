@@ -22,11 +22,6 @@ _: {
             default = fontSize;
             description = "Terminal and monospace text size, in points.";
           };
-          ligatures = lib.mkOption {
-            type = lib.types.bool;
-            default = false;
-            description = "Whether to enable programming ligatures.";
-          };
         };
       }
     )

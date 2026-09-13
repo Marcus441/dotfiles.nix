@@ -8,11 +8,8 @@ _: {
       }: let
         inherit (config.desktop) ansi font colors16;
         fontAt = size: let
-          features =
-            lib.optionalString (!font.ligatures)
-            (lib.concatMapStrings (f: ":fontfeatures=${f}") ["-calt" "-liga" "-clig" "-dlig"]);
           fonts =
-            ["${font.name}:size=${toString size}${features}"]
+            ["${font.name}:size=${toString size}"]
             ++ map (f: "${f}:size=${toString size}") [
               "DejaVu Sans Mono"
               "Noto Sans Mono"
