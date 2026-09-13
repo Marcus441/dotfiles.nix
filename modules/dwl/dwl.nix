@@ -93,15 +93,6 @@ _: {
         config,
         ...
       }: let
-        wallpaper = pkgs.fetchFromGitHub {
-          owner = "Marcus441";
-          repo = "walls";
-          rev = "b11022653952ac634b0c9af6966c560bb0ef0876";
-          hash = "sha256-ncCvJdy1wCVRdTK/WWnR63kfXw02q0I0xjIQdVM/jvU=";
-          sparseCheckout = ["walled_tiers/4k/aerial/satellite_dishes_on_a_building.jpg"];
-        };
-        wallpaperImage = "${wallpaper}/walled_tiers/4k/aerial/satellite_dishes_on_a_building.jpg";
-
         statusFeed =
           lib.optionalString (config.dwl.statusCommand != "")
           "{ ${config.dwl.statusCommand}; } | ";
@@ -115,7 +106,7 @@ _: {
           export XDG_CURRENT_DESKTOP=dwl
           export XDG_SESSION_TYPE=wayland
 
-          ${statusFeed}dwl -s 'dwl-monitors; ${pkgs.swaybg}/bin/swaybg -i ${wallpaperImage} -m fill & mako &${autostart}'
+          ${statusFeed}dwl -s 'dwl-monitors; & mako &${autostart}'
         '';
 
         dwl-desktop = pkgs.writeTextFile {
