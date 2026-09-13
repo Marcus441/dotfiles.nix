@@ -10,7 +10,7 @@ _: let
     conflicted = "!";
     modified = "~";
     untracked = "+";
-    upToDate = "";
+    upToDate = "✔";
     readOnly = " ";
   };
 in {
