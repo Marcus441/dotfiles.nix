@@ -1,12 +1,10 @@
 _: {
-  flake.modules.nixos.gaming = [
-    {
-      programs.steam.gamescopeSession.enable = true;
+  flake.modules.nixos.gaming = {
+    programs.steam.gamescopeSession.enable = true;
 
-      programs.gamescope = {
-        capSysNice = true;
-        args = ["--rt" "--adaptive-sync"];
-      };
-    }
-  ];
+    programs.gamescope = {
+      capSysNice = true;
+      args = ["--rt" "--adaptive-sync"];
+    };
+  };
 }

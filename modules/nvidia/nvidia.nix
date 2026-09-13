@@ -1,33 +1,27 @@
 _: {
-  flake.modules.nixos.nvidia = [
-    (
-      {config, ...}: {
-        hardware.graphics = {
-          enable = true;
-          enable32Bit = true;
-        };
+  flake.modules.nixos.nvidia = {config, ...}: {
+    hardware.graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
 
-        services.xserver.videoDrivers = ["nvidia"];
+    services.xserver.videoDrivers = ["nvidia"];
 
-        hardware.nvidia = {
-          modesetting.enable = true;
+    hardware.nvidia = {
+      modesetting.enable = true;
 
-          powerManagement.enable = true;
+      powerManagement.enable = true;
 
-          powerManagement.finegrained = false;
-          open = true;
-          nvidiaSettings = true;
-          package = config.boot.kernelPackages.nvidiaPackages.latest;
+      powerManagement.finegrained = false;
+      open = true;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.latest;
 
-          moduleParams.nvidia.NVreg_UsePageAttributeTable = 1;
-        };
-      }
-    )
-  ];
+      moduleParams.nvidia.NVreg_UsePageAttributeTable = 1;
+    };
+  };
 
-  flake.modules.homeManager.nvidia = [
-    {
-      home.sessionVariables.__GL_VRR_ALLOWED = "1";
-    }
-  ];
+  flake.modules.homeManager.nvidia = {
+    home.sessionVariables.__GL_VRR_ALLOWED = "1";
+  };
 }

@@ -1,9 +1,7 @@
 _: {
-  flake.modules.homeManager.dev = [
-    {
-      programs.devenv = {
-        enable = true;
-      };
-    }
-  ];
+  flake.modules.homeManager.dev = {
+    programs.devenv = {
+      enable = true;
+    };
+  };
 }

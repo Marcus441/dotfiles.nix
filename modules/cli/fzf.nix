@@ -1,10 +1,8 @@
 _: {
-  flake.modules.homeManager.core = [
-    {
-      programs.fzf = {
-        enable = true;
-        defaultCommand = "fd --type f --hidden --follow --exclude .git";
-      };
-    }
-  ];
+  flake.modules.homeManager.core = {
+    programs.fzf = {
+      enable = true;
+      defaultCommand = "fd --type f --hidden --follow --exclude .git";
+    };
+  };
 }
