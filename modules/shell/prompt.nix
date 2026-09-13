@@ -11,7 +11,7 @@ _: let
     modified = "~";
     untracked = "+";
     upToDate = "✔";
-    readOnly = " ";
+    readOnly = " ";
   };
 in {
   flake.modules.homeManager.core = {config, ...}: let
