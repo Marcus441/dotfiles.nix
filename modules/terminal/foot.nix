@@ -1,8 +1,4 @@
 _: {
-  flake.modules.nixos.foot = [
-    {dwl.autostart = ["foot --server"];}
-  ];
-
   flake.modules.homeManager.foot = [
     (
       {

@@ -46,7 +46,7 @@ _: {
           "text/x-script.python" = "nvim.desktop";
           "text/x-shellscript" = "nvim.desktop";
 
-          "x-scheme-handler/terminal" = "${pkgs.foot}/bin/footclient.desktop";
+          "x-scheme-handler/terminal" = "${pkgs.foot}/bin/foot.desktop";
         };
       };
     })

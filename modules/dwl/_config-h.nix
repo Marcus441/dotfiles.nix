@@ -139,8 +139,7 @@ in ''
   #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
   /* absolute store paths; termfbcmd needs no running server */
-  static const char *termcmd[]      = { "${pkgs.foot}/bin/footclient", NULL };
-  static const char *termfbcmd[]    = { "${pkgs.foot}/bin/foot", NULL };
+  static const char *termcmd[]      = { "${pkgs.foot}/bin/foot", NULL };
   static const char *ocrcmd[]       = { "${ocr-copy}/bin/ocr-copy", NULL };
   static const char *volupcmd[]     = { "${wpctl}", "set-volume", "-l", "1", "@DEFAULT_AUDIO_SINK@", "5%+", NULL };
   static const char *voldncmd[]     = { "${wpctl}", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%-", NULL };
@@ -155,7 +154,6 @@ in ''
   static const Key keys[] = {
     /* --- applications & screenshots  --- */
     { MODKEY,                    XKB_KEY_Return, spawn, {.v = termcmd} },   /* super+enter   -> terminal      */
-    { MODKEY|WLR_MODIFIER_CTRL,  XKB_KEY_Return, spawn, {.v = termfbcmd} }, /* super+ctrl+enter -> terminal (server-down fallback) */
     { MODKEY,                    XKB_KEY_d,      spawn,                     /* super+d       -> launcher      */
       SHCMD("${config.wmenu.launcher-command}") },
     { MODKEY,                    XKB_KEY_c,      spawn, {.v = ocrcmd} },    /* super+c       -> OCR to clip   */
@@ -170,7 +168,7 @@ in ''
     { MODKEY,                    XKB_KEY_q,      killclient,       {0} },                /* super+q       -> close      */
     { MODKEY,                    XKB_KEY_f,      togglefloating,   {0} },                /* super+f       -> float      */
     { MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_f,      togglefullscreen, {0} },                /* super+shift+f -> fullscreen */
-  ${toggleBarKey}
+    ${toggleBarKey}
     { MODKEY,                    XKB_KEY_j,      focusstack,       {.i = +1} },          /* super+j       -> focus next */
     { MODKEY,                    XKB_KEY_k,      focusstack,       {.i = -1} },          /* super+k       -> focus prev */
     { MODKEY,                    XKB_KEY_h,      setmfact,         {.f = -0.05f} },      /* super+h       -> shrink     */
