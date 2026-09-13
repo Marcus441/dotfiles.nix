@@ -18,9 +18,7 @@ in {
     inherit (config.desktop) colorsRgb;
   in {
     programs.bash.initExtra = ''
-      # OSC 7: report the cwd, so a new window opens in it. The path is
-      # percent-encoded: a raw directory name could end the sequence early
-      # and send escapes of its own.
+      # OSC 7: report the cwd, so a new window opens in it.
       __osc7_cwd() {
         local LC_ALL=C encoded="" char i
         for (( i = 0; i < ''${#PWD}; i++ )); do
@@ -34,9 +32,7 @@ in {
       }
 
       # Prompt: cwd, git branch, dev environment, and a "$" sigil. PS1
-      # names the branch and environment variables instead of embedding
-      # their values: bash expands PS1 again on display, so a branch
-      # called $(cmd) would run cmd.
+      # names variables rather than embedding values, which bash would expand.
       __prompt() {
         # Must be the first statement: anything else overwrites $?.
         local code=$?
@@ -82,9 +78,7 @@ in {
         local conflicted="" modified="" untracked=""
         local -i ahead=0 behind=0 upstream=0 inrepo=0
 
-        # Git: branch, status marks, and the repo root, which names the
-        # cwd. core.fsmonitor names a command for status to run: never
-        # take it from the config of whatever repo the cwd is in.
+        # Never run the repo's core.fsmonitor command.
         if out=$(command git -c core.fsmonitor=false --no-optional-locks \
                    status --porcelain=v2 --branch 2>/dev/null); then
           inrepo=1
@@ -120,8 +114,6 @@ in {
         fi
         local -a parts=( ''${(s:/:)dir} )
         (( $#parts > 2 )) && dir="…/''${(j:/:)parts[-2,-1]}"
-        # Control characters in a directory name would reach the terminal
-        # as escapes: show them as "?".
         dir=''${dir//[[:cntrl:]]/?}
 
         if (( upstream )); then
@@ -183,13 +175,9 @@ in {
       }
       add-zsh-hook preexec __prompt_preexec
 
-      # OSC 7: report the cwd, so a new window opens in it. The path is
-      # percent-encoded: a raw directory name could end the sequence early
-      # and send escapes of its own.
+      # OSC 7: report the cwd, so a new window opens in it.
       __osc7_cwd() {
         emulate -L zsh -o extended_glob
-        # Match bytes, not characters, so each byte of a multibyte
-        # character becomes its own %XX.
         local LC_ALL=C
         local encoded=''${PWD//(#m)[^-\/._~A-Za-z0-9]/%''${(l:2::0:)$(( [##16] #MATCH ))}}
         printf '\e]7;file://%s%s\e\\' "$HOST" "$encoded"
