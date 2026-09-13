@@ -7,10 +7,10 @@ _: let
     err = "base08";
   };
   mark = {
-    conflicted = " ";
-    modified = " ";
-    untracked = "? ";
-    upToDate = " ";
+    conflicted = "!";
+    modified = "~";
+    untracked = "+";
+    upToDate = "";
     readOnly = " ";
   };
 in {
@@ -88,9 +88,14 @@ in {
               done
             fi
 
-            root=$PWD
-            while [[ $root != / && ! -e $root/.git ]]; do root=''${root:h}; done
-            [[ -e $root/.git && $root != $HOME ]] || root=""
+            if (( inrepo )); then
+              root=$PWD
+              while [[ $root != / && ! -e $root/.git ]]; do root=''${root:h}; done
+              [[ $root != $HOME ]] || root=""
+            else
+              root=""
+            fi
+
             if [[ -n $root ]]; then
               dir=''${root:t}''${PWD#$root}
             elif [[ $PWD == "$HOME" ]]; then
@@ -164,7 +169,7 @@ in {
           add-zsh-hook preexec __prompt_preexec
 
           # OSC 7: report the cwd, so a new window opens in it.
-          __osc7_cwd() { printf '\e]7;file://%s%s\e\\' "$HOST" "$PWD" }
+          __osc7_cwd() { printf '\e]7;file://%s%s\e\\' "$HOST" "$PWD"; }
           add-zsh-hook precmd __osc7_cwd
         '';
       }
