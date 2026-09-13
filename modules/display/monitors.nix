@@ -22,4 +22,8 @@ in {
       }
     )
   ];
+
+  flake.modules.nixos.dwl = [
+    {dwl.autostart = ["dwl-monitors"];}
+  ];
 }

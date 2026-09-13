@@ -63,4 +63,8 @@ _: {
       '';
     }
   ];
+
+  flake.modules.nixos.dwl = [
+    {dwl.autostart = ["mako"];}
+  ];
 }

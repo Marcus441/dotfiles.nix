@@ -106,7 +106,7 @@ _: {
           export XDG_CURRENT_DESKTOP=dwl
           export XDG_SESSION_TYPE=wayland
 
-          ${statusFeed}dwl -s 'dwl-monitors; & mako &${autostart}'
+          ${statusFeed}dwl -s '${autostart}'
         '';
 
         dwl-desktop = pkgs.writeTextFile {
