@@ -13,6 +13,8 @@ _: {
         wlCopy = "${pkgs.wl-clipboard}/bin/wl-copy";
 
         wmenu = "${pkgs.wmenu}/bin/wmenu";
+        wmenuRun = "${pkgs.wmenu}/bin/wmenu-run";
+        pkill = "${lib.getExe' pkgs.procps "pkill"}";
         flags = lib.escapeShellArgs [
           "-f"
           "${font.name} 12"
@@ -44,8 +46,8 @@ _: {
         config = {
           home.packages = [pkgs.wmenu];
 
-          wmenu.cliphist-command = "${cliphist} list | ${wmenu} ${flags} | ${cliphist} decode | ${wlCopy} ";
-          wmenu.launcher-command = "${pkgs.wmenu}/bin/wmenu-run ${flags} ";
+          wmenu.cliphist-command = "${pkill} -x wmenu || ${cliphist} list | ${wmenu} ${flags} | ${cliphist} decode | ${wlCopy}";
+          wmenu.launcher-command = "${pkill} -x wmenu-run || ${wmenuRun} ${flags}";
         };
       }
     )
