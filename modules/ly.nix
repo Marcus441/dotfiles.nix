@@ -3,6 +3,9 @@ _: {
     {
       systemd.services.display-manager.environment.XDG_CURRENT_DESKTOP = "X-NIXOS-SYSTEMD-AWARE";
       services = {
+        # TODO: move to own file
+        logind.settings.Login.KillUserProcesses = true;
+
         displayManager.ly.enable = true;
         displayManager.ly.settings = {
           bigclock = "en";
