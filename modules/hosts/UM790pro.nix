@@ -16,7 +16,7 @@ _: {
       "keychron"
     ];
 
-    fontSize = 16;
+    fontSize = 24;
 
     hardware = ../../hosts/UM790pro/hardware-configuration.nix;
 
@@ -27,7 +27,7 @@ _: {
         width = 3840;
         height = 2160;
         refresh = 120;
-        scale = 1.5;
+        scale = 1;
       }
     ];
     input.sensitivity = 0;
