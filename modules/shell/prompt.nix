@@ -22,15 +22,15 @@ in {
       # percent-encoded: a raw directory name could end the sequence early
       # and send escapes of its own.
       __osc7_cwd() {
-        local LC_ALL=C p=$PWD out="" c i
-        for (( i = 0; i < ''${#p}; i++ )); do
-          c=''${p:i:1}
-          case $c in
-            [-/._~A-Za-z0-9]) out+=$c ;;
-            *) printf -v c '%%%02X' "'$c"; out+=$c ;;
+        local LC_ALL=C encoded="" char i
+        for (( i = 0; i < ''${#PWD}; i++ )); do
+          char=''${PWD:i:1}
+          case $char in
+            [-/._~A-Za-z0-9]) encoded+=$char ;;
+            *) printf -v char '%%%02X' "'$char"; encoded+=$char ;;
           esac
         done
-        printf '\e]7;file://%s%s\e\\' "''${HOSTNAME:-$(hostname)}" "$out"
+        printf '\e]7;file://%s%s\e\\' "''${HOSTNAME:-$(hostname)}" "$encoded"
       }
 
       # Prompt: cwd, git branch, dev environment, and a "$" sigil. PS1
@@ -77,13 +77,14 @@ in {
       # Prompt: a blank line, then cwd, git branch and status, dev
       # environment, and a sigil.
       __prompt() {
-        local out line dir root branch="" oid="" gs="" ab="" env=""
-        local it=$'\e[3m' ni=$'\e[23m'
+        local out line dir root="" branch="" oid="" marks="" ab="" env=""
+        local italic=$'\e[3m' upright=$'\e[23m'
         local conflicted="" modified="" untracked=""
         local -i ahead=0 behind=0 upstream=0 inrepo=0
 
-        # core.fsmonitor names a command for status to run: never take it
-        # from the config of whatever repo the cwd is in.
+        # Git: branch, status marks, and the repo root, which names the
+        # cwd. core.fsmonitor names a command for status to run: never
+        # take it from the config of whatever repo the cwd is in.
         if out=$(command git -c core.fsmonitor=false --no-optional-locks \
                    status --porcelain=v2 --branch 2>/dev/null); then
           inrepo=1
@@ -101,14 +102,11 @@ in {
               ('? '*) untracked="${mark.untracked}" ;;
             esac
           done
-        fi
+          [[ $branch == '(detached)' ]] && branch=''${oid[1,7]}
 
-        if (( inrepo )); then
           root=$PWD
           while [[ $root != / && ! -e $root/.git ]]; do root=''${root:h}; done
-          [[ $root != $HOME ]] || root=""
-        else
-          root=""
+          [[ $root == $HOME ]] && root=""
         fi
 
         if [[ -n $root ]]; then
@@ -137,7 +135,7 @@ in {
             ab="${mark.upToDate} "
           fi
         fi
-        gs="$conflicted$modified$untracked$ab"
+        marks="$conflicted$modified$untracked$ab"
 
         if [[ -n $DEVENV_ROOT ]]; then
           env="devenv"
@@ -156,9 +154,8 @@ in {
         [[ -w $PWD ]] || PROMPT+="%F{${colors16.${slot.err}}}${mark.readOnly}%f"
         PROMPT+=" "
         if (( inrepo )); then
-          [[ $branch == '(detached)' ]] && branch=''${oid[1,7]}
-          PROMPT+="%{$it%}%F{${colors16.${slot.git}}}''${branch//\%/%%}%f%{$ni%} "
-          [[ -n $gs ]] && PROMPT+="%F{${colors16.${slot.git}}}$gs%f"
+          PROMPT+="%{$italic%}%F{${colors16.${slot.git}}}''${branch//\%/%%}%f%{$upright%} "
+          [[ -n $marks ]] && PROMPT+="%F{${colors16.${slot.git}}}$marks%f"
         fi
         [[ -n $env ]] && PROMPT+="%F{${colors16.${slot.env}}}(''${env//\%/%%})%f "
         PROMPT+=$__prompt_sigil
@@ -191,9 +188,11 @@ in {
       # and send escapes of its own.
       __osc7_cwd() {
         emulate -L zsh -o extended_glob
+        # Match bytes, not characters, so each byte of a multibyte
+        # character becomes its own %XX.
         local LC_ALL=C
-        printf '\e]7;file://%s%s\e\\' "$HOST" \
-          "''${PWD//(#m)[^-\/._~A-Za-z0-9]/%''${(l:2::0:)$(( [##16] #MATCH ))}}"
+        local encoded=''${PWD//(#m)[^-\/._~A-Za-z0-9]/%''${(l:2::0:)$(( [##16] #MATCH ))}}
+        printf '\e]7;file://%s%s\e\\' "$HOST" "$encoded"
       }
       add-zsh-hook precmd __osc7_cwd
     '';
