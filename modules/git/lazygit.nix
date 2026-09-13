@@ -1,5 +1,5 @@
 _: {
-  flake.modules.homeManager.apps = {config, ...}: let
+  flake.modules.homeManager.dev = {config, ...}: let
     inherit (config.desktop) colors;
   in {
     programs.lazygit = {
