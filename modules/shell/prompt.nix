@@ -116,7 +116,7 @@ in {
               elif (( behind )); then
                 ab="⇣''${behind} "
               else
-                ab="${mark.upToDate}"
+                ab="${mark.upToDate} "
               fi
             fi
             gs="$conflicted$modified$untracked$ab"
