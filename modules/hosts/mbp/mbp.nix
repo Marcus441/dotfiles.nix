@@ -18,10 +18,12 @@ in {
   };
 
   flake.modules.homeManager.mbp = {
+    desktop.font.terminalSize = 24;
     imports = with inputs.self.modules.homeManager; [
       core
       zsh
       dev
+      ghostty
     ];
   };
 }

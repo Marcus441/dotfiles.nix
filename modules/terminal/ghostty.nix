@@ -40,7 +40,7 @@ _: {
               "17=${colors16.base0F}"
             ];
         }
-        // lib.optionalAttrs pkgs.stdenv.isDarwin {
+        // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
           macos-option-as-alt = "left";
           macos-titlebar-style = "transparent";
           window-save-state = "always";
