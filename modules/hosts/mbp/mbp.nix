@@ -12,6 +12,7 @@ in {
     imports = with inputs.self.modules.darwin; [
       core
       zsh
+      apps
     ];
 
     system.stateVersion = 6;
