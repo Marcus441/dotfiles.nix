@@ -7,11 +7,16 @@ _: let
     err = "base08";
   };
   mark = {
-    conflicted = "!";
+    conflicted = "";
+    stashed = "≡";
     modified = "~";
     untracked = "+";
     upToDate = "✔";
     readOnly = " ";
+  };
+  icon = {
+    nix = "";
+    python = "";
   };
 in {
   flake.modules.homeManager.core = {config, ...}: let
@@ -31,7 +36,8 @@ in {
         printf '\e]7;file://%s%s\e\\' "''${HOSTNAME:-$(hostname)}" "$encoded"
       }
 
-      # Prompt: cwd, git branch, dev environment, and a "$" sigil. PS1
+      # Prompt: cwd, git branch, dev environment, and a "$" sigil. Plain
+      # text only, since this shell may run where no Nerd Font exists. PS1
       # names variables rather than embedding values, which bash would expand.
       __prompt() {
         # Must be the first statement: anything else overwrites $?.
@@ -71,16 +77,17 @@ in {
       __prompt_sigil="%B%(?.%F{${colors16.${slot.ok}}}❯.%F{${colors16.${slot.err}}}✗)%f%b "
 
       # Prompt: a blank line, then cwd, git branch and status, dev
-      # environment, and a sigil.
+      # environment, and a sigil. Every segment ends with its own space.
       __prompt() {
         local out line dir root="" branch="" oid="" marks="" ab="" env=""
         local italic=$'\e[3m' upright=$'\e[23m'
-        local conflicted="" modified="" untracked=""
+        local conflicted="" stashed="" modified="" untracked=""
         local -i ahead=0 behind=0 upstream=0 inrepo=0
 
-        # Never run the repo's core.fsmonitor command.
+        # Never run the repo's core.fsmonitor command. --show-stash with
+        # porcelain v2 needs Git 2.35+.
         if out=$(command git -c core.fsmonitor=false --no-optional-locks \
-                   status --porcelain=v2 --branch 2>/dev/null); then
+                   status --porcelain=v2 --branch --show-stash 2>/dev/null); then
           inrepo=1
           for line in ''${(f)out}; do
             case $line in
@@ -90,6 +97,7 @@ in {
                 upstream=1
                 ahead=''${''${line#\# branch.ab +}%% *}
                 behind=''${line##*-} ;;
+              ('# stash '*) stashed="${mark.stashed}''${line#\# stash }" ;;
               ([12]' '*)
                 [[ ''${line[4]} == [MT] ]] && modified="${mark.modified}" ;;
               ('u '*) conflicted="${mark.conflicted}" ;;
@@ -118,23 +126,23 @@ in {
 
         if (( upstream )); then
           if (( ahead && behind )); then
-            ab="⇕⇡''${ahead}⇣''${behind} "
+            ab="⇕⇡''${ahead}⇣''${behind}"
           elif (( ahead )); then
-            ab="⇡''${ahead} "
+            ab="⇡''${ahead}"
           elif (( behind )); then
-            ab="⇣''${behind} "
+            ab="⇣''${behind}"
           else
-            ab="${mark.upToDate} "
+            ab="${mark.upToDate}"
           fi
         fi
-        marks="$conflicted$modified$untracked$ab"
+        marks="$conflicted$stashed$modified$untracked$ab"
 
         if [[ -n $DEVENV_ROOT ]]; then
-          env="devenv"
+          env="${icon.nix} devenv"
         elif [[ -n $IN_NIX_SHELL ]]; then
-          env="nix"
+          env="${icon.nix}"
         fi
-        [[ -n $VIRTUAL_ENV ]] && env="''${env:+$env,}venv:''${''${VIRTUAL_ENV##*/}//[[:cntrl:]]/?}"
+        [[ -n $VIRTUAL_ENV ]] && env="''${env:+$env }${icon.python} ''${''${VIRTUAL_ENV##*/}//[[:cntrl:]]/?}"
 
         if (( __prompt_topline )); then
           __prompt_topline=0
@@ -147,9 +155,9 @@ in {
         PROMPT+=" "
         if (( inrepo )); then
           PROMPT+="%{$italic%}%F{${colors16.${slot.git}}}''${branch//\%/%%}%f%{$upright%} "
-          [[ -n $marks ]] && PROMPT+="%F{${colors16.${slot.git}}}$marks%f"
+          [[ -n $marks ]] && PROMPT+="%F{${colors16.${slot.git}}}$marks%f "
         fi
-        [[ -n $env ]] && PROMPT+="%F{${colors16.${slot.env}}}(''${env//\%/%%})%f "
+        [[ -n $env ]] && PROMPT+="%F{${colors16.${slot.env}}}''${env//\%/%%}%f "
         PROMPT+=$__prompt_sigil
       }
       add-zsh-hook precmd __prompt
