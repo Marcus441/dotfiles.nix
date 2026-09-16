@@ -23,6 +23,17 @@ _: {
 
           scrollback-limit = 10000000; # bytes, not lines
           mouse-hide-while-typing = true;
+          confirm-close-surface = false;
+
+          shell-integration-features = "sudo,ssh-env,ssh-terminfo";
+
+          keybind = [
+            "global:super+backquote=toggle_quick_terminal"
+          ];
+
+          unfocused-split-opacity = 0.85;
+          cursor-style = "block";
+          cursor-style-blink = false;
 
           foreground = colors16.base05;
           background = colors16.base00;
@@ -45,6 +56,11 @@ _: {
           macos-titlebar-style = "transparent";
           window-save-state = "always";
           auto-update = "off";
+          quit-after-last-window-closed = true;
+        }
+        // lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+          app-notifications = "no-clipboard-copy";
+          quit-after-last-window-closed = true;
         };
     };
   };
