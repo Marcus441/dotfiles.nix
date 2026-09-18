@@ -2,7 +2,7 @@ _: let
   registry.templates.to = {
     type = "github";
     owner = "Marcus441";
-    repo = "nix-templates";
+    repo = "templates";
   };
 
   settings = {
