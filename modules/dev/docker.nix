@@ -24,6 +24,9 @@ _: {
       };
 
       # On darwin the docker package is the client, with the compose plugin.
-      home.packages = [config.services.colima.dockerPackage];
+      home.packages = [
+        config.services.colima.dockerPackage
+        pkgs.docker-credential-helpers
+      ];
     };
 }
