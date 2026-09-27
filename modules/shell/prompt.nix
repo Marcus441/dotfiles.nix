@@ -34,7 +34,7 @@ _: {
       text = ''
         autoload -U colors && colors
         setopt prompt_subst
-        zstyle ':omz:alpha:lib:git' async-prompt no
+        source ${omz}/lib/async_prompt.zsh
         source ${omz}/lib/git.zsh
         source ${omz}/themes/robbyrussell.zsh-theme
       '';
