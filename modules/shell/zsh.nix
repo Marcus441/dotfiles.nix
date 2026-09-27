@@ -116,6 +116,10 @@ in {
   };
 
   flake.modules.darwin.zsh = {
-    programs.zsh.enable = true;
+    programs.zsh = {
+      enable = true;
+      promptInit = "";
+      enableGlobalCompInit = false;
+    };
   };
 }
