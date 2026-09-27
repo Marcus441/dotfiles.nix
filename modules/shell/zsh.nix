@@ -26,6 +26,8 @@ in {
         highlight = "fg=${colors16.base03}";
       };
 
+      localVariables.ZSH_AUTOSUGGEST_MANUAL_REBIND = 1;
+
       syntaxHighlighting = {
         enable = true;
         styles = let
