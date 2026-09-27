@@ -64,12 +64,7 @@ _: {
       };
 
       cmp = {
-        border = {
-          fg = colors16.base01;
-          bg = colors16.base01;
-        };
-
-        inactive.bg = colors16.base01;
+        border.fg = colors16.base01;
 
         active = {
           reversed = false;
@@ -92,18 +87,12 @@ _: {
       };
 
       input = {
-        border = {
-          fg = colors16.base01;
-          bg = colors16.base01;
-        };
+        border.fg = colors16.base01;
 
         title = {
           fg = colors16.base03;
-          bg = colors16.base01;
           bold = true;
         };
-
-        value.bg = colors16.base01;
 
         selected = {
           reversed = false;
