@@ -1,5 +1,5 @@
 _: {
-  flake.modules.homeManager.apps = {pkgs, ...}: {
+  flake.modules.homeManager.yazi = {pkgs, ...}: {
     programs.yazi = {
       enable = true;
       shellWrapperName = "y";

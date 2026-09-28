@@ -17,6 +17,7 @@ in {
       wayland
       dwl
       apps
+      yazi
       keychron
     ];
 

@@ -25,6 +25,7 @@ in {
       zsh
       dev
       ghostty
+      yazi
     ];
   };
 }
