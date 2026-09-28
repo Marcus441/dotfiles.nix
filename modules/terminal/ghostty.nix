@@ -29,6 +29,18 @@ _: {
 
           keybind =
             [
+              # split focus
+              "ctrl+alt+h=goto_split:left"
+              "ctrl+alt+j=goto_split:down"
+              "ctrl+alt+k=goto_split:up"
+              "ctrl+alt+l=goto_split:right"
+
+              # split resize
+              "ctrl+super+h=resize_split:left,40"
+              "ctrl+super+j=resize_split:down,40"
+              "ctrl+super+k=resize_split:up,40"
+              "ctrl+super+l=resize_split:right,40"
+              "ctrl+alt+equal=equalize_splits"
             ]
             ++ lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin [
               "global:super+backquote=toggle_quick_terminal"
