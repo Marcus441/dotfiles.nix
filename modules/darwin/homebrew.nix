@@ -11,6 +11,7 @@ _: {
 
       casks = [
         "1password"
+        "bitwarden"
         "microsoft-teams"
         "notion"
         "raycast"
@@ -20,7 +21,6 @@ _: {
 
       masApps = {
         "1Password for Safari" = 1569813296;
-        "Bitwarden" = 1352778147;
         "Kagi for Safari" = 1622835804;
         "Noir - Dark Mode for Safari" = 1592917505;
         "Xcode" = 497799835;
