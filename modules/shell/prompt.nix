@@ -19,9 +19,7 @@ _: let
     python = "";
   };
 in {
-  flake.modules.homeManager.core = {config, ...}: let
-    inherit (config.desktop) colorsRgb;
-  in {
+  flake.modules.homeManager.core = {
     programs.bash.initExtra = ''
       # OSC 7: report the cwd, so a new window opens in it.
       __osc7_cwd() {
@@ -36,31 +34,11 @@ in {
         printf '\e]7;file://%s%s\e\\' "''${HOSTNAME:-$(hostname)}" "$encoded"
       }
 
-      # Prompt: cwd, git branch, dev environment, and a "$" sigil. Plain
-      # text only, since this shell may run where no Nerd Font exists. PS1
-      # names variables rather than embedding values, which bash would expand.
       __prompt() {
-        # Must be the first statement: anything else overwrites $?.
-        local code=$?
-        local venv
-        __prompt_branch=$(command git symbolic-ref --quiet --short HEAD 2>/dev/null)
-        __prompt_env=""
-        if [[ -n $DEVENV_ROOT ]]; then
-          __prompt_env="devenv"
-        elif [[ -n $IN_NIX_SHELL ]]; then
-          __prompt_env="nix"
-        fi
-        if [[ -n $VIRTUAL_ENV ]]; then
-          venv=''${VIRTUAL_ENV##*/}
-          __prompt_env="''${__prompt_env:+$__prompt_env,}venv:''${venv//[[:cntrl:]]/?}"
-        fi
-        PS1='\[\e[1;38;2;${colorsRgb.${slot.cwd}}m\]\w\[\e[0m\]'
-        [[ -n $__prompt_branch ]] && PS1+=' \[\e[38;2;${colorsRgb.${slot.git}}m\]git:''${__prompt_branch}\[\e[0m\]'
-        [[ -n $__prompt_env ]] && PS1+=' \[\e[38;2;${colorsRgb.${slot.env}}m\](''${__prompt_env})\[\e[0m\]'
-        local sigil="${colorsRgb.${slot.ok}}"
-        [[ $code -ne 0 ]] && sigil="${colorsRgb.${slot.err}}"
-        PS1+=" \[\e[38;2;''${sigil}m\]\\\$\[\e[0m\] "
+        __prompt_cwd=''${PWD/#$HOME/\~}
+        __prompt_cwd=''${__prompt_cwd//[[:cntrl:]]/?}
       }
+      PS1='$__prompt_cwd$ '
       case "$PROMPT_COMMAND" in
         *__prompt*) ;;
         *) PROMPT_COMMAND="__prompt;__osc7_cwd''${PROMPT_COMMAND:+;$PROMPT_COMMAND}" ;;
