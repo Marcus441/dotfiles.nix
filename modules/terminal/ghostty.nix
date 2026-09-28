@@ -27,9 +27,12 @@ _: {
 
           shell-integration-features = "sudo,ssh-env,ssh-terminfo";
 
-          keybind = [
-            "global:super+backquote=toggle_quick_terminal"
-          ];
+          keybind =
+            [
+            ]
+            ++ lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin [
+              "global:super+backquote=toggle_quick_terminal"
+            ];
 
           unfocused-split-opacity = 0.85;
           cursor-style = "block";
