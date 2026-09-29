@@ -8,12 +8,12 @@ _: {
     options.desktop.font = {
       name = lib.mkOption {
         type = lib.types.str;
-        default = "JetbrainsMono Nerd Font";
+        default = "Iosevka Fixed";
         description = "Primary monospace font family.";
       };
       package = lib.mkOption {
         type = lib.types.package;
-        default = pkgs.nerd-fonts.jetbrains-mono;
+        default = pkgs.iosevka-bin.override {variant = "SGr-IosevkaFixed";};
         description = "Package that provides the monospace font family.";
       };
       terminalSize = lib.mkOption {
