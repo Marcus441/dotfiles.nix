@@ -19,13 +19,34 @@ _: {
       terminalSize = lib.mkOption {
         type = lib.types.int;
         default = 12;
-        description = "Terminal and monospace text size, in points. Hosts set it for their panel.";
+        description = "Monospace text size, in points. Hosts set it for their panel.";
+      };
+    };
+
+    options.terminal.font = {
+      name = lib.mkOption {
+        type = lib.types.str;
+        default = "Iosevka Term";
+        description = "Terminal font family.";
+      };
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.iosevka-bin.override {variant = "SGr-IosevkaTerm";};
+        description = "Package that provides the terminal font family.";
+      };
+      terminalSize = lib.mkOption {
+        type = lib.types.int;
+        default = 24;
+        description = "Terminal text size, in points. Hosts set it for their panel.";
       };
     };
 
     config = {
       home.packages =
-        [config.desktop.font.package]
+        [
+          config.desktop.font.package
+          config.terminal.font.package
+        ]
         ++ (with pkgs; [
           dejavu_fonts
           font-awesome
