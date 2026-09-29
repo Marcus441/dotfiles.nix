@@ -9,6 +9,7 @@ _: {
       fonts =
         ["${font.name}:size=${toString size}"]
         ++ map (f: "${f}:size=${toString size}") [
+          "Symbols Nerd Font"
           "DejaVu Sans Mono"
           "Noto Sans Mono"
         ];
