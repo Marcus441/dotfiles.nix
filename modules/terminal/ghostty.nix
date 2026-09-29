@@ -5,7 +5,8 @@ _: {
     pkgs,
     ...
   }: let
-    inherit (config.desktop) ansi font colors16;
+    inherit (config.desktop) ansi colors16;
+    inherit (config.terminal) font;
   in {
     programs.ghostty = {
       enable = true;
