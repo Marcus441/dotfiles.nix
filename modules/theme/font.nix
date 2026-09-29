@@ -1,5 +1,6 @@
 _: {
   flake.modules.homeManager.core = {
+    config,
     lib,
     pkgs,
     ...
@@ -10,6 +11,11 @@ _: {
         default = "JetbrainsMono Nerd Font";
         description = "Primary monospace font family.";
       };
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.nerd-fonts.jetbrains-mono;
+        description = "Package that provides the monospace font family.";
+      };
       terminalSize = lib.mkOption {
         type = lib.types.int;
         default = 12;
@@ -18,16 +24,17 @@ _: {
     };
 
     config = {
-      home.packages = with pkgs; [
-        dejavu_fonts
-        font-awesome
-        inter
-        nerd-fonts.jetbrains-mono
-        nerd-fonts.symbols-only
-        noto-fonts
-        noto-fonts-color-emoji
-        noto-fonts-lgc-plus
-      ];
+      home.packages =
+        [config.desktop.font.package]
+        ++ (with pkgs; [
+          dejavu_fonts
+          font-awesome
+          inter
+          nerd-fonts.symbols-only
+          noto-fonts
+          noto-fonts-color-emoji
+          noto-fonts-lgc-plus
+        ]);
       fonts.fontconfig.enable = true;
     };
   };
