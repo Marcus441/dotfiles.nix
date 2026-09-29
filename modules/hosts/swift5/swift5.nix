@@ -35,6 +35,7 @@ in {
     ];
 
     desktop.font.terminalSize = 16;
+    terminal.font.terminalSize = 16;
 
     desktop.monitors = [
       {

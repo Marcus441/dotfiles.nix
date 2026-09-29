@@ -74,6 +74,7 @@ in {
     ];
 
     desktop.font.terminalSize = 24;
+    terminal.font.terminalSize = 24;
 
     desktop.monitors = [
       {
