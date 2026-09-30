@@ -1,6 +1,6 @@
 # NixOS Config
 
-My personal NixOS configuration, featuring a Kanagawa Dragon themed desktop.
+My personal NixOS configuration, featuring a Modus Vivendi themed desktop.
 
 It follows **the dendritic pattern**: every `.nix` file under `modules/` is a
 flake-parts module, and NixOS / nix-darwin / home-manager modules are stored as
