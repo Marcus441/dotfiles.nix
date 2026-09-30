@@ -56,32 +56,32 @@ _: {
     };
 
     config.desktop.colors = {
-      base00 = "#181616";
-      base01 = "#282727";
-      base02 = "#2d4f67";
-      base03 = "#737c73";
-      base04 = "#a6a69c";
-      base05 = "#c5c9c5";
-      base06 = "#c8c093";
-      base07 = "#c5c9c5";
+      base00 = "#000000";
+      base01 = "#1e1e1e";
+      base02 = "#303030";
+      base03 = "#989898";
+      base04 = "#bfc0c4";
+      base05 = "#ffffff";
+      base06 = "#f4f4f4";
+      base07 = "#ffffff";
 
-      base08 = "#c4746e";
-      base09 = "#b6927b";
-      base0A = "#c4b28a";
-      base0B = "#8a9a7b";
-      base0C = "#8ea4a2";
-      base0D = "#8ba4b0";
-      base0E = "#a292a3";
-      base0F = "#b98d7b";
+      base08 = "#ff5f59";
+      base09 = "#db7b5f";
+      base0A = "#d0bc00";
+      base0B = "#44bc44";
+      base0C = "#00d3d0";
+      base0D = "#2fafff";
+      base0E = "#feacd0";
+      base0F = "#c0965b";
 
-      base10 = "#12120f";
-      base11 = "#0d0c0c";
-      base12 = "#e46876";
-      base13 = "#e6c384";
-      base14 = "#87a987";
-      base15 = "#7aa89f";
-      base16 = "#7fb4ca";
-      base17 = "#938aa9";
+      base10 = "#0f0f0f";
+      base11 = "#000000";
+      base12 = "#ff5f5f";
+      base13 = "#efef00";
+      base14 = "#44df44";
+      base15 = "#00eff0";
+      base16 = "#338fff";
+      base17 = "#ff66ff";
     };
   };
 }
