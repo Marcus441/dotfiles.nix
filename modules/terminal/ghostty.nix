@@ -16,6 +16,7 @@ _: {
         {
           font-family = [font.name "DejaVu Sans Mono" "Noto Sans Mono"];
           font-size = font.terminalSize;
+          font-feature = lib.optionals (!font.ligatures) ["-calt" "-liga" "-dlig"];
 
           window-padding-x = 8;
           window-padding-y = 8;

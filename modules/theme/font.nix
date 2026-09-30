@@ -39,6 +39,11 @@ _: {
         default = 24;
         description = "Terminal text size, in points. Hosts set it for their panel.";
       };
+      ligatures = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Whether terminals render the font's ligatures.";
+      };
     };
 
     config = {
