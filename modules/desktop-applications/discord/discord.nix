@@ -67,8 +67,7 @@ _: {
             --background-message-hover:     #${c.base05}0a;
 
             /* ── text ──────────────────────────────────────────────
-               base05 body, base04 secondary, base03 tertiary.
-               headers use base06 (old white) for kanagawa warmth. */
+               base05 body, base04 secondary, base03 tertiary. */
             --text-normal:    #${c.base05};
             --text-default:   #${c.base05};
             --text-muted:     #${c.base04};
