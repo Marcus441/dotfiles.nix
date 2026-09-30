@@ -41,6 +41,11 @@ _: {
       description = "`desktop.colors` in ANSI slot order, 0-7 then the brights. The list index *is* the slot number, so every terminal renders the same mapping into its own vocabulary.";
     };
 
+    options.desktop.syntax = lib.mkOption {
+      type = lib.types.attrsOf (lib.types.strMatching "#[0-9a-fA-F]{6}");
+      description = "Syntax roles from the editor colorscheme, for highlighters outside it.";
+    };
+
     options.desktop.colorsRgb = lib.mkOption {
       type = lib.types.attrsOf lib.types.str;
       readOnly = true;
@@ -82,6 +87,22 @@ _: {
       base15 = "#00eff0";
       base16 = "#338fff";
       base17 = "#ff66ff";
+    };
+
+    config.desktop.syntax = {
+      comment = "#989898";
+      keyword = "#b6a0ff";
+      function = "#feacd0";
+      builtin = "#f78fe7";
+      string = "#79a8ff";
+      type = "#6ae4b9";
+      identifier = "#00d3d0";
+      number = "#82b0ec";
+      boolean = "#2fafff";
+      preproc = "#ff7f9f";
+      regex = "#00c06f";
+      escape = "#d2b580";
+      heading = "#c6daff";
     };
   };
 }
