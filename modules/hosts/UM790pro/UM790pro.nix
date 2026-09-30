@@ -17,7 +17,6 @@ in {
       wayland
       dwl
       apps
-      yazi
       keychron
     ];
 
@@ -71,6 +70,7 @@ in {
       foot
       firefox
       apps
+      yazi
     ];
 
     desktop.font.terminalSize = 24;
