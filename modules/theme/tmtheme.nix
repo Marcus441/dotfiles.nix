@@ -43,10 +43,10 @@ _: {
       description = "syntect theme rendered from desktop.colors.";
     };
 
-    config.desktop.syntaxTheme = pkgs.writeText "kanagawa-dragon.tmTheme" (
+    config.desktop.syntaxTheme = pkgs.writeText "modus-vivendi.tmTheme" (
       lib.generators.toPlist {escape = true;} {
-        name = "Kanagawa Dragon";
-        author = "Template: Chris Kempson; scheme: base24 Kanagawa Dragon";
+        name = "Modus Vivendi";
+        author = "Template: Chris Kempson; scheme: base24 Modus Vivendi";
         colorSpaceName = "sRGB";
 
         settings = [
