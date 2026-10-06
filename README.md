@@ -1,6 +1,6 @@
 # NixOS Config
 
-My personal NixOS configuration, featuring a Modus Vivendi themed desktop.
+My personal NixOS configuration. The desktop is stock; the terminal and editor are Modus Vivendi.
 
 It follows **the dendritic pattern**: every `.nix` file under `modules/` is a
 flake-parts module, and NixOS / nix-darwin / home-manager modules are stored as
