@@ -17,7 +17,6 @@ _: {
       historySize = 50000;
 
       initExtra = ''
-        # Globbing: **, extended patterns, empty expansion, cd typo correction.
         shopt -s globstar extglob nullglob dirspell cdspell
       '';
     };

@@ -10,8 +10,6 @@
     description = "Helpers that build a host's configuration from its aspect.";
   };
 
-  # Each helper evaluates the aspect named after the host; the host file
-  # decides everything else by what it imports.
   config.flake.lib =
     let
       inherit (inputs.self) modules;

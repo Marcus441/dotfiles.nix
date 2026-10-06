@@ -62,8 +62,6 @@ _: {
   flake.modules.nixos.dwl =
     { pkgs, ... }:
     let
-      # dwl itself comes from the standalone home profile, so the session only
-      # loads that profile and hands over to its dwl-start.
       session = pkgs.writeShellScript "dwl-session" ''
         hm_vars="$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
         [ -f "$hm_vars" ] && . "$hm_vars"

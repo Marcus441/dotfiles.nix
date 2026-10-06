@@ -6,8 +6,6 @@ _: {
     };
   };
 
-  # Darwin has no Docker daemon: Colima runs one in a VM as a launchd agent,
-  # and DOCKER_HOST points the CLI and lazydocker at its socket.
   flake.modules.homeManager.dev =
     {
       config,
@@ -24,7 +22,6 @@ _: {
         };
       };
 
-      # On darwin the docker package is the client, with the compose plugin.
       home.packages = [
         config.services.colima.dockerPackage
         pkgs.docker-credential-helpers

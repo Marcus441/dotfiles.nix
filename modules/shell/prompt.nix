@@ -1,7 +1,6 @@
 _: {
   flake.modules.homeManager.core = {
     programs.bash.initExtra = ''
-      # OSC 7: report the cwd, so a new window opens in it.
       __osc7_cwd() {
         local LC_ALL=C encoded="" char i
         for (( i = 0; i < ''${#PWD}; i++ )); do
@@ -53,7 +52,6 @@ _: {
       programs.zsh.initContent = ''
         autoload -Uz add-zsh-hook
 
-        # OSC 7: report the cwd, so a new window opens in it.
         __osc7_cwd() {
           emulate -L zsh -o extended_glob
           local LC_ALL=C
