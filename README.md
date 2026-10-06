@@ -66,6 +66,14 @@ modules that use them.
 `homeManager.core` is cross-platform; Linux-only pieces are guarded with
 `pkgs.stdenv.hostPlatform.isLinux`, so the same home baseline evaluates on a Mac.
 
+You can install the Firefox profile without Nix managing it, with Firefox
+closed, via:
+
+```bash
+nix build .#firefox-profile
+cp -L result/* ~/Library/Application\ Support/Firefox/Profiles/<profile>/
+```
+
 Hosts import aspects flat. flake-parts does not deduplicate modules, so an
 aspect must not import another aspect that a host could also list — its options
 would be declared twice. Importing an aspect a class doesn't define is an
