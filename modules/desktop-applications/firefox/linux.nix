@@ -1,10 +1,11 @@
 _: {
-  flake.modules.homeManager.firefox = {
-    config,
-    lib,
-    pkgs,
-    ...
-  }:
+  flake.modules.homeManager.firefox =
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
       xdg.mimeApps.defaultApplications = {
         "application/x-extension-htm" = "firefox.desktop";

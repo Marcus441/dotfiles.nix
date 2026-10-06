@@ -1,10 +1,10 @@
 _: {
-  flake.modules.nixos.gaming = {pkgs, ...}: {
+  flake.modules.nixos.gaming = { pkgs, ... }: {
     programs.steam = {
-      extraCompatPackages = [pkgs.proton-ge-bin];
+      extraCompatPackages = [ pkgs.proton-ge-bin ];
       protontricks.enable = true;
     };
 
-    boot.kernelModules = ["ntsync"];
+    boot.kernelModules = [ "ntsync" ];
   };
 }

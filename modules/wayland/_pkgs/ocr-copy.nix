@@ -8,7 +8,15 @@
   libnotify,
 }:
 writeShellScriptBin "ocr-copy" ''
-  export PATH=$PATH:${lib.makeBinPath [grim slurp tesseract wl-clipboard libnotify]}
+  export PATH=$PATH:${
+    lib.makeBinPath [
+      grim
+      slurp
+      tesseract
+      wl-clipboard
+      libnotify
+    ]
+  }
 
   text=$(grim -g "$(slurp)" - | tesseract stdin stdout --psm 6 2>/dev/null)
 

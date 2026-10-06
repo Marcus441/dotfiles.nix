@@ -1,6 +1,8 @@
-_: let
+_:
+let
   shorts = "https://raw.githubusercontent.com/gijsdev/ublock-hide-yt-shorts/master/list.txt";
-in {
+in
+{
   flake.modules.homeManager.firefox = {
     programs.firefox.policies = {
       ExtensionSettings = {
@@ -16,9 +18,9 @@ in {
       };
 
       "3rdparty".Extensions."uBlock0@raymondhill.net".adminSettings = {
-        selectedFilterLists = [shorts];
+        selectedFilterLists = [ shorts ];
 
-        userSettings.importedLists = [shorts];
+        userSettings.importedLists = [ shorts ];
 
         userFilters = ''
           www.youtube.com##ytd-browse[page-subtype="home"] ytd-rich-grid-renderer

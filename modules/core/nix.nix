@@ -1,4 +1,5 @@
-_: let
+_:
+let
   registry.templates.to = {
     type = "github";
     owner = "Marcus441";
@@ -6,7 +7,10 @@ _: let
   };
 
   settings = {
-    experimental-features = ["nix-command" "flakes"];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     warn-dirty = false;
     extra-substituters = [
       "https://nix-community.cachix.org"
@@ -19,15 +23,18 @@ _: let
       "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
     ];
   };
-in {
-  flake.modules.homeManager.core = {pkgs, ...}: {
-    home.packages = [pkgs.nix-prefetch-scripts];
+in
+{
+  flake.modules.homeManager.core = { pkgs, ... }: {
+    home.packages = [ pkgs.nix-prefetch-scripts ];
   };
 
   flake.modules.nixos.core = {
     nix = {
       inherit registry;
-      settings = settings // {auto-optimise-store = true;};
+      settings = settings // {
+        auto-optimise-store = true;
+      };
     };
   };
 

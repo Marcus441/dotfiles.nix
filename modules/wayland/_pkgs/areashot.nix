@@ -7,7 +7,14 @@
   libnotify,
 }:
 writeShellScriptBin "areashot" ''
-  export PATH="$PATH:${lib.makeBinPath [grim slurp wl-clipboard libnotify]}"
+  export PATH="$PATH:${
+    lib.makeBinPath [
+      grim
+      slurp
+      wl-clipboard
+      libnotify
+    ]
+  }"
   set -o pipefail
   if grim -g "$(slurp)" - | wl-copy --type image/png; then
     notify-send "Area Screenshot Successful" "Image copied to clipboard"

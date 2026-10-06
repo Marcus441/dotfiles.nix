@@ -1,5 +1,5 @@
 _: {
-  flake.modules.homeManager.wayland = {pkgs, ...}: {
+  flake.modules.homeManager.wayland = { pkgs, ... }: {
     gtk = {
       enable = true;
 

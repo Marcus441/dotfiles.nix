@@ -1,9 +1,9 @@
 _: {
-  flake.modules.nixos.gaming = {pkgs, ...}: {
-    programs.steam.extraPackages = [pkgs.mangohud];
+  flake.modules.nixos.gaming = { pkgs, ... }: {
+    programs.steam.extraPackages = [ pkgs.mangohud ];
   };
 
-  flake.modules.homeManager.gaming = {config, ...}: {
+  flake.modules.homeManager.gaming = { config, ... }: {
     programs.mangohud = {
       enable = true;
       settings = {

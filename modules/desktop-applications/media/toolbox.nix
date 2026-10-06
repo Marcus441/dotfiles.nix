@@ -1,5 +1,5 @@
 _: {
-  flake.modules.homeManager.core = {pkgs, ...}: {
+  flake.modules.homeManager.core = { pkgs, ... }: {
     home.packages = [
       pkgs.ffmpeg
       pkgs.imagemagick
@@ -8,7 +8,7 @@ _: {
     ];
   };
 
-  flake.modules.homeManager.wayland = {pkgs, ...}: {
+  flake.modules.homeManager.wayland = { pkgs, ... }: {
     home.packages = [
       pkgs.imv
       pkgs.playerctl

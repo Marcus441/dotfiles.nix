@@ -1,11 +1,11 @@
 _: {
-  flake.modules.homeManager.core = {config, ...}: {
+  flake.modules.homeManager.core = { config, ... }: {
     home.sessionVariables = {
       XCOMPOSECACHE = "${config.xdg.cacheHome}/X11/xcompose";
     };
   };
 
-  flake.modules.homeManager.dev = {config, ...}: {
+  flake.modules.homeManager.dev = { config, ... }: {
     home.sessionVariables = {
       CARGO_HOME = "${config.xdg.dataHome}/cargo";
       RUSTUP_HOME = "${config.xdg.dataHome}/rustup";

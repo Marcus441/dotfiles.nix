@@ -26,38 +26,41 @@ _: {
     '';
   };
 
-  flake.modules.homeManager.zsh = {pkgs, ...}: let
-    omz = "${pkgs.oh-my-zsh}/share/oh-my-zsh";
-    robbyrussell = pkgs.writeTextFile {
-      name = "robbyrussell-prompt";
-      destination = "/robbyrussell.plugin.zsh";
-      text = ''
-        autoload -U colors && colors
-        setopt prompt_subst
-        source ${omz}/lib/async_prompt.zsh
-        source ${omz}/lib/git.zsh
-        source ${omz}/themes/robbyrussell.zsh-theme
+  flake.modules.homeManager.zsh =
+    { pkgs, ... }:
+    let
+      omz = "${pkgs.oh-my-zsh}/share/oh-my-zsh";
+      robbyrussell = pkgs.writeTextFile {
+        name = "robbyrussell-prompt";
+        destination = "/robbyrussell.plugin.zsh";
+        text = ''
+          autoload -U colors && colors
+          setopt prompt_subst
+          source ${omz}/lib/async_prompt.zsh
+          source ${omz}/lib/git.zsh
+          source ${omz}/themes/robbyrussell.zsh-theme
+        '';
+      };
+    in
+    {
+      programs.zsh.plugins = [
+        {
+          name = "robbyrussell";
+          src = robbyrussell;
+        }
+      ];
+
+      programs.zsh.initContent = ''
+        autoload -Uz add-zsh-hook
+
+        # OSC 7: report the cwd, so a new window opens in it.
+        __osc7_cwd() {
+          emulate -L zsh -o extended_glob
+          local LC_ALL=C
+          local encoded=''${PWD//(#m)[^-\/._~A-Za-z0-9]/%''${(l:2::0:)$(( [##16] #MATCH ))}}
+          printf '\e]7;file://%s%s\e\\' "$HOST" "$encoded"
+        }
+        add-zsh-hook precmd __osc7_cwd
       '';
     };
-  in {
-    programs.zsh.plugins = [
-      {
-        name = "robbyrussell";
-        src = robbyrussell;
-      }
-    ];
-
-    programs.zsh.initContent = ''
-      autoload -Uz add-zsh-hook
-
-      # OSC 7: report the cwd, so a new window opens in it.
-      __osc7_cwd() {
-        emulate -L zsh -o extended_glob
-        local LC_ALL=C
-        local encoded=''${PWD//(#m)[^-\/._~A-Za-z0-9]/%''${(l:2::0:)$(( [##16] #MATCH ))}}
-        printf '\e]7;file://%s%s\e\\' "$HOST" "$encoded"
-      }
-      add-zsh-hook precmd __osc7_cwd
-    '';
-  };
 }

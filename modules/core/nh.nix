@@ -1,4 +1,4 @@
-{config, ...}: {
+{ config, ... }: {
   flake.modules.nixos.core = {
     programs.nh = {
       enable = true;

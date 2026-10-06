@@ -1,5 +1,5 @@
-{inputs, ...}: {
-  flake.modules.homeManager.dev = {pkgs, ...}: {
+{ inputs, ... }: {
+  flake.modules.homeManager.dev = { pkgs, ... }: {
     programs.devenv = {
       enable = true;
       enableZshIntegration = false;

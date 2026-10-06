@@ -173,13 +173,13 @@ _: {
           engines = {
             "Kagi" = {
               name = "Kagi";
-              urls = [{template = "https://kagi.com/search?q={searchTerms}";}];
-              definedAliases = ["@k"];
+              urls = [ { template = "https://kagi.com/search?q={searchTerms}"; } ];
+              definedAliases = [ "@k" ];
             };
             "claude" = {
               name = "Claude";
-              urls = [{template = "https://claude.ai/new?q={searchTerms}";}];
-              definedAliases = ["@claude"];
+              urls = [ { template = "https://claude.ai/new?q={searchTerms}"; } ];
+              definedAliases = [ "@claude" ];
             };
             "nix-packages" = {
               name = "Nix Packages";
@@ -198,7 +198,7 @@ _: {
                   ];
                 }
               ];
-              definedAliases = ["@np"];
+              definedAliases = [ "@np" ];
             };
             "nix-options" = {
               name = "NixOS Options";
@@ -213,7 +213,7 @@ _: {
                   ];
                 }
               ];
-              definedAliases = ["@no"];
+              definedAliases = [ "@no" ];
             };
             "nix-wiki" = {
               name = "NixOS Wiki";
@@ -222,7 +222,7 @@ _: {
                   template = "https://wiki.nixos.org/w/index.php?search={searchTerms}";
                 }
               ];
-              definedAliases = ["@nw"];
+              definedAliases = [ "@nw" ];
             };
             "home-manager" = {
               name = "Home Manager Options";
@@ -241,7 +241,7 @@ _: {
                   ];
                 }
               ];
-              definedAliases = ["@hm"];
+              definedAliases = [ "@hm" ];
             };
             "google".metaData.hidden = true;
             "bing".metaData.hidden = true;

@@ -1,8 +1,8 @@
 _: {
-  flake.modules.homeManager.apps = {pkgs, ...}: {
+  flake.modules.homeManager.apps = { pkgs, ... }: {
     xdg.mimeApps.defaultApplications."x-scheme-handler/discord" = "equibop.desktop";
 
-    home.packages = [pkgs.equibop];
+    home.packages = [ pkgs.equibop ];
 
     xdg.configFile = {
       "equibop/settings.json".source = ./equibop-settings.json;

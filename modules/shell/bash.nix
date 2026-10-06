@@ -9,7 +9,10 @@ _: {
     programs.bash = {
       enable = true;
 
-      historyControl = ["ignoredups" "ignorespace"];
+      historyControl = [
+        "ignoredups"
+        "ignorespace"
+      ];
       historyFileSize = 100000;
       historySize = 50000;
 

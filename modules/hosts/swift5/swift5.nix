@@ -2,9 +2,11 @@
   config,
   inputs,
   ...
-}: let
+}:
+let
   inherit (config.flake.lib) mkNixos mkHome;
-in {
+in
+{
   flake.nixosConfigurations.swift5 = mkNixos "x86_64-linux" "swift5";
   flake.homeConfigurations."${config.meta.user}@swift5" = mkHome "x86_64-linux" "swift5";
 

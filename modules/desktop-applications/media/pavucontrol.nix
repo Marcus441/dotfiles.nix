@@ -1,5 +1,5 @@
 _: {
-  flake.modules.homeManager.wayland = {pkgs, ...}: {
-    home.packages = [pkgs.pavucontrol];
+  flake.modules.homeManager.wayland = { pkgs, ... }: {
+    home.packages = [ pkgs.pavucontrol ];
   };
 }

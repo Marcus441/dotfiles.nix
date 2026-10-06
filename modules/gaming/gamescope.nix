@@ -4,7 +4,10 @@ _: {
 
     programs.gamescope = {
       capSysNice = true;
-      args = ["--rt" "--adaptive-sync"];
+      args = [
+        "--rt"
+        "--adaptive-sync"
+      ];
     };
   };
 }

@@ -1,5 +1,5 @@
 _: {
-  flake.modules.homeManager.wayland = {pkgs, ...}: {
+  flake.modules.homeManager.wayland = { pkgs, ... }: {
     xdg.mimeApps = {
       enable = true;
       defaultApplications = {

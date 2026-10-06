@@ -1,10 +1,16 @@
-{config, ...}: let
+{ config, ... }:
+let
   inherit (config.meta) user;
-in {
+in
+{
   flake.modules.nixos.core = {
     users.users.${user} = {
       isNormalUser = true;
-      extraGroups = ["wheel" "networkmanager" "docker"];
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "docker"
+      ];
     };
   };
 

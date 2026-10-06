@@ -2,9 +2,11 @@
   config,
   inputs,
   ...
-}: let
+}:
+let
   inherit (config.flake.lib) mkDarwin mkHome;
-in {
+in
+{
   flake.darwinConfigurations.mbp = mkDarwin "aarch64-darwin" "mbp";
   flake.homeConfigurations."${config.meta.user}@mbp" = mkHome "aarch64-darwin" "mbp";
 

@@ -1,39 +1,41 @@
 _: {
-  flake.modules.homeManager.core = {pkgs, ...}: {
+  flake.modules.homeManager.core = { pkgs, ... }: {
     home.packages = [
       pkgs.dnsutils
       pkgs.httpie
     ];
   };
 
-  flake.modules.nixos.core = {
-    lib,
-    pkgs,
-    ...
-  }: {
-    environment.systemPackages = [
-      pkgs.iw
-      pkgs.wget
-    ];
+  flake.modules.nixos.core =
+    {
+      lib,
+      pkgs,
+      ...
+    }:
+    {
+      environment.systemPackages = [
+        pkgs.iw
+        pkgs.wget
+      ];
 
-    systemd.services.NetworkManager-wait-online.enable = false;
-    networking = {
-      networkmanager = {
-        enable = true;
-        wifi = {
-          powersave = lib.mkDefault false;
-          backend = "iwd";
+      systemd.services.NetworkManager-wait-online.enable = false;
+      networking = {
+        networkmanager = {
+          enable = true;
+          wifi = {
+            powersave = lib.mkDefault false;
+            backend = "iwd";
+          };
         };
-      };
-      wireless.iwd = {
-        settings = {
-          Settings.AutoConnect = true;
-          Network = {
-            AddressRandomization = "network";
-            AddressRandomizationRange = "full";
+        wireless.iwd = {
+          settings = {
+            Settings.AutoConnect = true;
+            Network = {
+              AddressRandomization = "network";
+              AddressRandomizationRange = "full";
+            };
           };
         };
       };
     };
-  };
 }

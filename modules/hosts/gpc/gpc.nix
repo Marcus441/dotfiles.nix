@@ -2,9 +2,11 @@
   config,
   inputs,
   ...
-}: let
+}:
+let
   inherit (config.flake.lib) mkNixos mkHome;
-in {
+in
+{
   flake.nixosConfigurations.gpc = mkNixos "x86_64-linux" "gpc";
   flake.homeConfigurations."${config.meta.user}@gpc" = mkHome "x86_64-linux" "gpc";
 

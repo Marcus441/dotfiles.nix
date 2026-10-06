@@ -1,5 +1,5 @@
 _: {
-  flake.modules.homeManager.dwl-bar = {pkgs, ...}: {
+  flake.modules.homeManager.dwl-bar = { pkgs, ... }: {
     dwl = {
       bar = true;
 
@@ -11,7 +11,10 @@ _: {
         })
       ];
 
-      buildInputs = [pkgs.fcft pkgs.libdrm];
+      buildInputs = [
+        pkgs.fcft
+        pkgs.libdrm
+      ];
 
       statusCommand = "while :; do date '+%a %d %b  %H:%M'; sleep 30; done";
     };

@@ -1,5 +1,5 @@
 _: {
-  flake.modules.nixos.gaming = {pkgs, ...}: {
+  flake.modules.nixos.gaming = { pkgs, ... }: {
     services.scx = {
       enable = true;
 
