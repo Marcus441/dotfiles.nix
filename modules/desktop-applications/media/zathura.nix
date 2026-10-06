@@ -1,9 +1,5 @@
 _: {
-  flake.modules.homeManager.wayland = {config, ...}: let
-    inherit (config.desktop) colors;
-
-    translucent = c: "${c}80";
-  in {
+  flake.modules.homeManager.wayland = {
     programs.zathura = {
       enable = true;
       options = {
@@ -16,30 +12,6 @@ _: {
         render-loading = false;
         scroll-full-overlap = "0.01";
 
-        default-bg = colors.base00;
-        default-fg = colors.base01;
-        statusbar-bg = colors.base02;
-        statusbar-fg = colors.base04;
-        inputbar-bg = colors.base00;
-        inputbar-fg = colors.base05;
-
-        notification-bg = colors.base00;
-        notification-fg = colors.base05;
-        notification-error-bg = colors.base00;
-        notification-error-fg = colors.base08;
-        notification-warning-bg = colors.base00;
-        notification-warning-fg = colors.base0A;
-
-        completion-bg = colors.base01;
-        completion-fg = colors.base0D;
-        completion-highlight-bg = colors.base0D;
-        completion-highlight-fg = colors.base05;
-
-        highlight-color = translucent colors.base0A;
-        highlight-active-color = translucent colors.base0D;
-
-        recolor-lightcolor = colors.base00;
-        recolor-darkcolor = colors.base06;
       };
       mappings = {
         "u" = "scroll half-up";
