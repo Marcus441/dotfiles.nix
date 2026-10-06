@@ -13,7 +13,7 @@ _: {
         options = {
           name = mkOption {
             type = types.str;
-            description = "Connector, as the kernel names it (`HDMI-A-1`).";
+            description = "Connector name, as in `HDMI-A-1`.";
           };
 
           width = mkOption { type = types.ints.positive; };
@@ -54,7 +54,7 @@ _: {
       options.desktop.monitors = mkOption {
         type = types.listOf monitor;
         default = [ ];
-        description = "This host's outputs. Applied with wlr-randr at session start, so any wlroots compositor honours them.";
+        description = "Outputs applied with wlr-randr at session start.";
       };
 
       config = {

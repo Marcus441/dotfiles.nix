@@ -3,7 +3,7 @@ _: {
     options.desktop.autostart = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [ ];
-      description = "Commands the session backgrounds once the compositor is up, resolved from PATH. Session pieces add to it; the compositor aspect decides how to launch them.";
+      description = "Commands the session backgrounds once the compositor is up.";
     };
 
     config.home.sessionVariables = {

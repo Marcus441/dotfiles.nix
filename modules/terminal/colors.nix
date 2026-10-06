@@ -8,12 +8,7 @@ _: {
     {
       options.terminal.colors = lib.mkOption {
         type = lib.types.attrsOf (lib.types.strMatching "#[0-9a-fA-F]{6}");
-        description = ''
-          Terminal palette (hex, with leading '#'): the sixteen ANSI slots by
-          name plus the special colours, as Ghostty's Modus Vivendi theme sets
-          them. Ghostty loads the theme itself; foot and the programs that run
-          inside either copy it.
-        '';
+        description = "Ghostty's Modus Vivendi palette: the sixteen ANSI slots by name plus the special colours.";
       };
 
       options.terminal.ansi = lib.mkOption {
@@ -38,7 +33,7 @@ _: {
           brightCyan
           brightWhite
         ];
-        description = "`terminal.colors` in ANSI slot order, 0-7 then the brights. The list index *is* the slot number.";
+        description = "`terminal.colors` in ANSI slot order.";
       };
 
       options.terminal.colorsRgb = lib.mkOption {
@@ -55,7 +50,7 @@ _: {
             4
           ]
         ) config.terminal.colors;
-        description = "`terminal.colors` as `r;g;b`, the parameters of a 24-bit SGR sequence.";
+        description = "`terminal.colors` as `r;g;b` for 24-bit SGR sequences.";
       };
 
       config.terminal.colors = {

@@ -16,12 +16,12 @@ _: {
         package = lib.mkOption {
           type = lib.types.package;
           default = pkgs.iosevka-bin.override { variant = "SGr-IosevkaFixed"; };
-          description = "Package that provides the monospace font family.";
+          description = "Package providing the monospace font.";
         };
         terminalSize = lib.mkOption {
           type = lib.types.int;
           default = 12;
-          description = "Monospace text size, in points. Hosts set it for their panel.";
+          description = "Monospace text size, in points.";
         };
       };
 
@@ -34,12 +34,12 @@ _: {
         package = lib.mkOption {
           type = lib.types.package;
           default = pkgs.iosevka-bin.override { variant = "SGr-IosevkaTerm"; };
-          description = "Package that provides the terminal font family.";
+          description = "Package providing the terminal font.";
         };
         terminalSize = lib.mkOption {
           type = lib.types.int;
           default = 24;
-          description = "Terminal text size, in points. Hosts set it for their panel.";
+          description = "Terminal text size, in points.";
         };
         ligatures = lib.mkOption {
           type = lib.types.bool;

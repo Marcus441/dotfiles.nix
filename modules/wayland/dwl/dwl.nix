@@ -29,25 +29,25 @@ _: {
         bar = lib.mkOption {
           type = lib.types.bool;
           default = false;
-          description = "Whether the compiled dwl has a bar. Selects which symbols config.h defines: showbar/fonts/tags[]/colors[][3] against upstream's bordercolor/focuscolor/urgentcolor and TAGCOUNT.";
+          description = "Whether dwl is built with the bar patch.";
         };
 
         patches = lib.mkOption {
           type = lib.types.listOf lib.types.path;
           default = [ ];
-          description = "Applied to nixpkgs' dwl before config.h is copied in.";
+          description = "Patches applied to nixpkgs' dwl.";
         };
 
         buildInputs = lib.mkOption {
           type = lib.types.listOf lib.types.package;
           default = [ ];
-          description = "Extra buildInputs the patches need.";
+          description = "Extra build inputs the patches need.";
         };
 
         statusCommand = lib.mkOption {
           type = lib.types.str;
           default = "";
-          description = "Shell command whose stdout dwl reads as bar status. Empty when the compositor was built without a bar, in which case nothing is piped into it.";
+          description = "Command whose stdout feeds the bar status.";
         };
       };
 

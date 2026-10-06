@@ -38,13 +38,13 @@ _: {
     {
       options.terminal.syntax = lib.mkOption {
         type = lib.types.attrsOf (lib.types.strMatching "#[0-9a-fA-F]{6}");
-        description = "Syntax roles from the editor colorscheme, for highlighters outside it.";
+        description = "Syntax roles of the editor colorscheme.";
       };
 
       options.terminal.syntaxTheme = lib.mkOption {
         type = lib.types.path;
         readOnly = true;
-        description = "syntect theme rendered from terminal.colors and terminal.syntax.";
+        description = "syntect theme rendered from the terminal palette.";
       };
 
       config.terminal.syntax = {

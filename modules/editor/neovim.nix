@@ -14,7 +14,7 @@
       options.editor.package = lib.mkOption {
         type = lib.types.package;
         default = neovim.min;
-        description = "Neovim build every host installs; `dev` raises it to the LSP-complete one.";
+        description = "Neovim build to install.";
       };
 
       config.home = {

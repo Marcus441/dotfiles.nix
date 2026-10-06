@@ -7,7 +7,7 @@
   options.flake.lib = lib.mkOption {
     type = lib.types.lazyAttrsOf lib.types.raw;
     default = { };
-    description = "Helpers that turn a host's aspect module into a configuration.";
+    description = "Helpers that build a host's configuration from its aspect.";
   };
 
   # Each helper evaluates the aspect named after the host; the host file
