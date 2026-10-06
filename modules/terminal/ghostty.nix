@@ -5,7 +5,6 @@ _: {
     pkgs,
     ...
   }: let
-    inherit (config.desktop) ansi colors16;
     inherit (config.terminal) font;
   in {
     programs.ghostty = {
@@ -50,21 +49,7 @@ _: {
           cursor-style = "block";
           cursor-style-blink = false;
 
-          foreground = colors16.base05;
-          background = colors16.base00;
-
-          cursor-color = colors16.base05;
-          cursor-text = colors16.base00;
-
-          selection-foreground = colors16.base06;
-          selection-background = colors16.base02;
-
-          palette =
-            lib.imap0 (i: hex: "${toString i}=${hex}") ansi
-            ++ [
-              "16=${colors16.base09}"
-              "17=${colors16.base0F}"
-            ];
+          theme = "Modus Vivendi";
         }
         // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
           macos-option-as-alt = "left";
