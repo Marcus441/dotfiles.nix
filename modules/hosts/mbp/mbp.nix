@@ -29,6 +29,7 @@ in
       dev
       ghostty
       yazi
+      firefox
     ];
   };
 }
