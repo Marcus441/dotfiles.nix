@@ -1,6 +1,6 @@
 _: {
   flake.modules.homeManager.dev = {config, ...}: let
-    inherit (config.desktop) colors;
+    inherit (config.terminal) colors;
   in {
     programs.lazygit = {
       enable = true;
@@ -13,14 +13,14 @@ _: {
 
             selectedLineBgColor = ["default"];
 
-            activeBorderColor = [colors.base0D "bold"];
-            inactiveBorderColor = [colors.base03];
-            searchingActiveBorderColor = [colors.base04 "bold"];
-            defaultFgColor = [colors.base05];
-            optionsTextColor = [colors.base06];
-            unstagedChangesColor = [colors.base08];
-            cherryPickedCommitBgColor = [colors.base02];
-            cherryPickedCommitFgColor = [colors.base03];
+            activeBorderColor = [colors.blue "bold"];
+            inactiveBorderColor = [colors.brightBlack];
+            searchingActiveBorderColor = [colors.white "bold"];
+            defaultFgColor = [colors.foreground];
+            optionsTextColor = [colors.foreground];
+            unstagedChangesColor = [colors.red];
+            cherryPickedCommitBgColor = [colors.selectionBackground];
+            cherryPickedCommitFgColor = [colors.brightBlack];
           };
         };
       };
