@@ -10,9 +10,9 @@
   inherit (config.desktop) font;
   hasBar = config.dwl.bar;
 
-  wpctl = "${pkgs.wireplumber}/bin/wpctl";
-  brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
-  playerctl = "${pkgs.playerctl}/bin/playerctl";
+  wpctl = lib.getExe' pkgs.wireplumber "wpctl";
+  brightnessctl = lib.getExe pkgs.brightnessctl;
+  playerctl = lib.getExe pkgs.playerctl;
 
   barAppearance = lib.optionalString hasBar ''
     static const int showbar                   = 1;  /* 0 means no bar */
@@ -142,8 +142,8 @@ in ''
   #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
   /* absolute store paths; termfbcmd needs no running server */
-  static const char *termcmd[]      = { "${pkgs.foot}/bin/foot", NULL };
-  static const char *ocrcmd[]       = { "${ocr-copy}/bin/ocr-copy", NULL };
+  static const char *termcmd[]      = { "${lib.getExe pkgs.foot}", NULL };
+  static const char *ocrcmd[]       = { "${lib.getExe ocr-copy}", NULL };
   static const char *volupcmd[]     = { "${wpctl}", "set-volume", "-l", "1", "@DEFAULT_AUDIO_SINK@", "5%+", NULL };
   static const char *voldncmd[]     = { "${wpctl}", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%-", NULL };
   static const char *volmutecmd[]   = { "${wpctl}", "set-mute", "@DEFAULT_AUDIO_SINK@", "toggle", NULL };
@@ -161,9 +161,9 @@ in ''
       SHCMD("${config.wmenu.launcher-command}") },
     { MODKEY,                    XKB_KEY_c,      spawn, {.v = ocrcmd} },    /* super+c       -> OCR to clip   */
     { MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_s,      spawn,                     /* super+shift+s -> shot (screen) */
-      SHCMD("${screenshot}/bin/screenshot") },
+      SHCMD("${lib.getExe screenshot}") },
     { 0,                         XKB_KEY_Print,  spawn,                     /* print         -> shot (area)   */
-      SHCMD("${areashot}/bin/areashot") },
+      SHCMD("${lib.getExe areashot}") },
     { MODKEY,                    XKB_KEY_v,      spawn,                     /* super+v       -> clipboard     */
       SHCMD("${config.wmenu.cliphist-command}") },
 

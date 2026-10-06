@@ -8,7 +8,11 @@ in {
   flake.nixosConfigurations.UM790pro = mkNixos "x86_64-linux" "UM790pro";
   flake.homeConfigurations."${config.meta.user}@UM790pro" = mkHome "x86_64-linux" "UM790pro";
 
-  flake.modules.nixos.UM790pro = {pkgs, ...}: {
+  flake.modules.nixos.UM790pro = {
+    lib,
+    pkgs,
+    ...
+  }: {
     imports = with inputs.self.modules.nixos; [
       ./_hardware-configuration.nix
       core
@@ -26,7 +30,7 @@ in {
     networking.networkmanager.wifi.powersave = false;
     boot.kernelParams = ["usbcore.autosuspend=-1"];
     services.udev.extraRules = ''
-      ACTION=="add", SUBSYSTEM=="net", KERNEL=="wlan*", RUN+="${pkgs.iw}/bin/iw dev $name set power_save off"
+      ACTION=="add", SUBSYSTEM=="net", KERNEL=="wlan*", RUN+="${lib.getExe pkgs.iw} dev $name set power_save off"
     '';
 
     programs.nix-ld = {

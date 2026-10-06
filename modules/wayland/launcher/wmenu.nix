@@ -7,12 +7,12 @@ _: {
   }: let
     inherit (config.desktop) font;
 
-    cliphist = "${pkgs.cliphist}/bin/cliphist";
-    wlCopy = "${pkgs.wl-clipboard}/bin/wl-copy";
+    cliphist = lib.getExe pkgs.cliphist;
+    wlCopy = lib.getExe' pkgs.wl-clipboard "wl-copy";
 
-    wmenu = "${pkgs.wmenu}/bin/wmenu";
-    wmenuRun = "${pkgs.wmenu}/bin/wmenu-run";
-    pkill = "${lib.getExe' pkgs.procps "pkill"}";
+    wmenu = lib.getExe pkgs.wmenu;
+    wmenuRun = lib.getExe' pkgs.wmenu "wmenu-run";
+    pkill = lib.getExe' pkgs.procps "pkill";
     flags = lib.escapeShellArgs [
       "-f"
       "${font.name} 12"
