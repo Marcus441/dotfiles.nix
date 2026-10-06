@@ -1,8 +1,12 @@
 { config, inputs, ... }:
 {
   perSystem =
-    { pkgs, ... }:
+    { system, ... }:
     let
+      pkgs = import inputs.nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
       inherit (pkgs) lib;
 
       home = inputs.home-manager.lib.homeManagerConfiguration {
