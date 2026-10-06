@@ -29,9 +29,9 @@
   in {
     editor.package = neovim.full;
 
-    home.packages = with pkgs; [
-      ghostscript
-      tectonic
+    home.packages = [
+      pkgs.ghostscript
+      pkgs.tectonic
     ];
   };
 }

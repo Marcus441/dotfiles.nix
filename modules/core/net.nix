@@ -1,8 +1,8 @@
 _: {
   flake.modules.homeManager.core = {pkgs, ...}: {
-    home.packages = with pkgs; [
-      dnsutils
-      httpie
+    home.packages = [
+      pkgs.dnsutils
+      pkgs.httpie
     ];
   };
 
@@ -11,9 +11,9 @@ _: {
     pkgs,
     ...
   }: {
-    environment.systemPackages = with pkgs; [
-      iw
-      wget
+    environment.systemPackages = [
+      pkgs.iw
+      pkgs.wget
     ];
 
     systemd.services.NetworkManager-wait-online.enable = false;

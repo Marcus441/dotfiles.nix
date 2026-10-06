@@ -35,30 +35,30 @@ in {
 
     programs.nix-ld = {
       enable = true;
-      libraries = with pkgs; [
-        libbsd
-        dbus
-        libdrm
-        expat
-        libgbm
-        nspr
-        nss
-        libpng
-        libpulseaudio
-        libuuid
-        zlib
-        libice
-        libsm
-        libx11
-        libxcb
-        libxext
-        libxi
-        libxkbfile
+      libraries = [
+        pkgs.libbsd
+        pkgs.dbus
+        pkgs.libdrm
+        pkgs.expat
+        pkgs.libgbm
+        pkgs.nspr
+        pkgs.nss
+        pkgs.libpng
+        pkgs.libpulseaudio
+        pkgs.libuuid
+        pkgs.zlib
+        pkgs.libice
+        pkgs.libsm
+        pkgs.libx11
+        pkgs.libxcb
+        pkgs.libxext
+        pkgs.libxi
+        pkgs.libxkbfile
 
-        libglvnd
-        libxau
-        vulkan-loader
-        wayland
+        pkgs.libglvnd
+        pkgs.libxau
+        pkgs.vulkan-loader
+        pkgs.wayland
       ];
     };
   };

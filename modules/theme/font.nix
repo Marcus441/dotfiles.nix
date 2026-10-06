@@ -52,14 +52,14 @@ _: {
           config.desktop.font.package
           config.terminal.font.package
         ]
-        ++ (with pkgs; [
-          dejavu_fonts
-          font-awesome
-          inter
-          nerd-fonts.symbols-only
-          noto-fonts
-          noto-fonts-color-emoji
-          noto-fonts-lgc-plus
+        ++ ([
+          pkgs.dejavu_fonts
+          pkgs.font-awesome
+          pkgs.inter
+          pkgs.nerd-fonts.symbols-only
+          pkgs.noto-fonts
+          pkgs.noto-fonts-color-emoji
+          pkgs.noto-fonts-lgc-plus
         ]);
       fonts.fontconfig.enable = true;
     };

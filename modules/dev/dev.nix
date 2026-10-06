@@ -4,10 +4,10 @@ _: {
 
     services.usbmuxd.enable = true;
 
-    environment.systemPackages = with pkgs; [
-      libimobiledevice
-      qemu_kvm
-      quickemu
+    environment.systemPackages = [
+      pkgs.libimobiledevice
+      pkgs.qemu_kvm
+      pkgs.quickemu
     ];
   };
 }

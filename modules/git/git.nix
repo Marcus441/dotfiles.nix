@@ -1,8 +1,8 @@
 _: {
   flake.modules.homeManager.core = {pkgs, ...}: {
-    home.packages = with pkgs; [
-      gh
-      git-graph
+    home.packages = [
+      pkgs.gh
+      pkgs.git-graph
     ];
 
     programs.git = {

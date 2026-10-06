@@ -1,8 +1,8 @@
 _: {
   flake.modules.homeManager.wayland = {pkgs, ...}: {
-    home.packages = with pkgs; [
-      wl-clipboard
-      cliphist
+    home.packages = [
+      pkgs.wl-clipboard
+      pkgs.cliphist
     ];
   };
 }
