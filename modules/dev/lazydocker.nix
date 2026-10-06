@@ -1,6 +1,6 @@
 _: {
   flake.modules.homeManager.dev = {config, ...}: let
-    inherit (config.desktop) colors;
+    inherit (config.terminal) colors;
   in {
     programs.lazydocker = {
       enable = true;
@@ -8,9 +8,9 @@ _: {
         gui.theme = {
           selectedLineBgColor = ["default"];
 
-          activeBorderColor = [colors.base0D "bold"];
-          inactiveBorderColor = [colors.base03];
-          optionsTextColor = [colors.base06];
+          activeBorderColor = [colors.blue "bold"];
+          inactiveBorderColor = [colors.brightBlack];
+          optionsTextColor = [colors.foreground];
         };
       };
     };
