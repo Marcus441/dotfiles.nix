@@ -2,7 +2,7 @@
   inherit (config.meta) user;
 in {
   flake.modules.homeManager.zsh = {config, ...}: let
-    inherit (config.desktop) colors16 colorsRgb;
+    inherit (config.terminal) colors colorsRgb;
   in {
     programs.zsh = {
       enable = true;
@@ -23,7 +23,7 @@ in {
 
       autosuggestion = {
         enable = true;
-        highlight = "fg=${colors16.base03}";
+        highlight = "fg=${colors.brightBlack}";
       };
 
       localVariables.ZSH_AUTOSUGGEST_MANUAL_REBIND = 1;
@@ -31,16 +31,16 @@ in {
       syntaxHighlighting = {
         enable = true;
         styles = let
-          command = "fg=${colors16.base0B}";
-          string = "fg=${colors16.base0A}";
-          substitution = "fg=${colors16.base0C}";
-          filepath = "fg=${colors16.base0D}";
-          plain = "fg=${colors16.base05}";
+          command = "fg=${colors.green}";
+          string = "fg=${colors.yellow}";
+          substitution = "fg=${colors.cyan}";
+          filepath = "fg=${colors.blue}";
+          plain = "fg=${colors.foreground}";
         in {
           default = plain;
-          unknown-token = "fg=${colors16.base08}";
-          reserved-word = "fg=${colors16.base0E}";
-          comment = "fg=${colors16.base03}";
+          unknown-token = "fg=${colors.red}";
+          reserved-word = "fg=${colors.magenta}";
+          comment = "fg=${colors.brightBlack}";
 
           alias = command;
           suffix-alias = command;
@@ -55,8 +55,8 @@ in {
           path = filepath;
           path_prefix = filepath;
           autodirectory = filepath;
-          globbing = "fg=${colors16.base09}";
-          history-expansion = "fg=${colors16.base0E}";
+          globbing = "fg=${colors.brightYellow}";
+          history-expansion = "fg=${colors.magenta}";
 
           single-quoted-argument = string;
           double-quoted-argument = string;
@@ -88,10 +88,10 @@ in {
         zstyle ':completion:*' menu select
         unsetopt list_ambiguous
 
-        zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS} 'ma=48;2;${colorsRgb.base02};38;2;${colorsRgb.base06}'
-        zstyle ':completion:*:descriptions' format '%F{${colors16.base0C}}%d%f'
-        zstyle ':completion:*:messages' format '%F{${colors16.base03}}%d%f'
-        zstyle ':completion:*:warnings' format '%F{${colors16.base08}}no matches%f'
+        zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS} 'ma=48;2;${colorsRgb.selectionBackground};38;2;${colorsRgb.selectionForeground}'
+        zstyle ':completion:*:descriptions' format '%F{${colors.cyan}}%d%f'
+        zstyle ':completion:*:messages' format '%F{${colors.brightBlack}}%d%f'
+        zstyle ':completion:*:warnings' format '%F{${colors.red}}no matches%f'
 
         [[ -r /etc/zinputrc ]] && source /etc/zinputrc
 
