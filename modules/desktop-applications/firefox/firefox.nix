@@ -121,52 +121,6 @@ _: {
         id = 0;
         isDefault = true;
 
-        containersForce = true;
-        containers = {
-          personal = {
-            id = 1;
-            name = "Personal";
-            color = "blue";
-            icon = "fingerprint";
-          };
-          work = {
-            id = 2;
-            name = "Work";
-            color = "orange";
-            icon = "briefcase";
-          };
-          shopping = {
-            id = 3;
-            name = "Shopping";
-            color = "pink";
-            icon = "cart";
-          };
-          banking = {
-            id = 4;
-            name = "Banking";
-            color = "yellow";
-            icon = "dollar";
-          };
-          email-1 = {
-            id = 5;
-            name = "Email 1";
-            color = "turquoise";
-            icon = "circle";
-          };
-          email-2 = {
-            id = 6;
-            name = "Email 2";
-            color = "green";
-            icon = "circle";
-          };
-          email-3 = {
-            id = 7;
-            name = "Email 3";
-            color = "purple";
-            icon = "circle";
-          };
-        };
-
         search = {
           force = true;
           default = "Kagi";
