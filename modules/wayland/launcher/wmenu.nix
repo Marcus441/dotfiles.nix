@@ -5,7 +5,7 @@ _: {
     pkgs,
     ...
   }: let
-    inherit (config.desktop) colors font;
+    inherit (config.desktop) font;
 
     cliphist = "${pkgs.cliphist}/bin/cliphist";
     wlCopy = "${pkgs.wl-clipboard}/bin/wl-copy";
@@ -18,18 +18,6 @@ _: {
       "${font.name} 12"
       "-l"
       "10"
-      "-N"
-      colors.base00
-      "-n"
-      colors.base05
-      "-M"
-      colors.base02
-      "-m"
-      colors.base05
-      "-S"
-      colors.base02
-      "-s"
-      colors.base05
     ];
   in {
     options.wmenu.cliphist-command = lib.mkOption {
