@@ -1,9 +1,7 @@
 _: {
-  flake.modules.homeManager.firefox = {config, ...}: {
+  flake.modules.homeManager.firefox = {
     programs.firefox = {
       enable = true;
-      configPath = "${config.xdg.configHome}/mozilla/firefox";
-
       policies = {
         DisableTelemetry = true;
         DisableFirefoxStudies = true;

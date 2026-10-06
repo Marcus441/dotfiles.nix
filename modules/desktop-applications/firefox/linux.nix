@@ -1,5 +1,6 @@
 _: {
   flake.modules.homeManager.firefox = {
+    config,
     lib,
     pkgs,
     ...
@@ -20,5 +21,7 @@ _: {
         "x-scheme-handler/unknown" = "firefox.desktop";
         "x-scheme-handler/webcal" = "firefox.desktop";
       };
+
+      programs.firefox.configPath = "${config.xdg.configHome}/mozilla/firefox";
     };
 }
