@@ -23,7 +23,7 @@ _: {
           window-padding-balance = true;
           window-theme = "ghostty";
 
-          scrollback-limit = 10000000; # bytes, not lines
+          scrollback-limit = 10000000;
           mouse-hide-while-typing = true;
           confirm-close-surface = false;
 
@@ -31,13 +31,11 @@ _: {
 
           keybind =
             [
-              # split focus
               "ctrl+alt+h=goto_split:left"
               "ctrl+alt+j=goto_split:down"
               "ctrl+alt+k=goto_split:up"
               "ctrl+alt+l=goto_split:right"
 
-              # split resize
               "ctrl+super+h=resize_split:left,40"
               "ctrl+super+j=resize_split:down,40"
               "ctrl+super+k=resize_split:up,40"

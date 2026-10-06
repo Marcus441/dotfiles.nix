@@ -81,25 +81,20 @@ in {
       };
 
       initContent = ''
-        # Globbing: extended patterns; empty expansion instead of an error.
         setopt extended_glob null_glob interactivecomments
 
-        # Completion: case- and separator-insensitive, list first, then a menu.
         zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}'
         zstyle ':completion:*' completer _complete _match
         zstyle ':completion:*' menu select
         unsetopt list_ambiguous
 
-        # Menu colours: file types from LS_COLORS, selected row from the palette.
         zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS} 'ma=48;2;${colorsRgb.base02};38;2;${colorsRgb.base06}'
         zstyle ':completion:*:descriptions' format '%F{${colors16.base0C}}%d%f'
         zstyle ':completion:*:messages' format '%F{${colors16.base03}}%d%f'
         zstyle ':completion:*:warnings' format '%F{${colors16.base08}}no matches%f'
 
-        # Rebind the keys /etc/zinputrc left in the keymap we relinked away from.
         [[ -r /etc/zinputrc ]] && source /etc/zinputrc
 
-        # C-x C-e: edit the line in $VISUAL, as readline binds by default.
         autoload -Uz edit-command-line
         zle -N edit-command-line
         bindkey '^X^E' edit-command-line
