@@ -56,6 +56,7 @@ modules that use them.
 | `dwl-bar`   |       |        |      ✓      |
 | `foot`      |       |        |      ✓      |
 | `firefox`   |       |        |      ✓      |
+| `firefox-profile` |   |        |      ✓      |
 | `apps`      |   ✓   |        |      ✓      |
 | `gaming`    |   ✓   |        |      ✓      |
 | `nvidia`    |   ✓   |        |      ✓      |

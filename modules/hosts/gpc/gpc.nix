@@ -30,6 +30,7 @@ in
       zsh
       wayland
       firefox
+      firefox-profile
       gaming
       nvidia
       apps

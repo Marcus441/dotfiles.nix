@@ -30,6 +30,7 @@ in
       ghostty
       yazi
       firefox
+      firefox-profile
     ];
   };
 }

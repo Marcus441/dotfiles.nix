@@ -33,6 +33,7 @@ in
       dwl-bar
       foot
       firefox
+      firefox-profile
       laptop
     ];
 

@@ -77,6 +77,7 @@ in
       dwl-bar
       foot
       firefox
+      firefox-profile
       apps
       yazi
     ];
