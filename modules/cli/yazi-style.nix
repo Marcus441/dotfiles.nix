@@ -30,7 +30,7 @@ _: {
           bg = "lightcyan";
         };
         tab_width = 1;
-        syntect_theme = "${config.desktop.syntaxTheme}";
+        syntect_theme = "${config.terminal.syntaxTheme}";
 
         border_style.fg = colors16.base01;
 

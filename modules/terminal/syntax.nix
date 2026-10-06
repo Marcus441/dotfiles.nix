@@ -6,19 +6,18 @@ _: {
     ...
   }: let
     inherit
-      (config.desktop.colors)
-      base00
-      base01
-      base02
-      base03
-      base05
-      base08
-      base09
-      base0A
-      base0B
-      base0F
+      (config.terminal.colors)
+      background
+      foreground
+      selectionBackground
+      red
+      green
+      yellow
+      magenta
+      brightBlack
+      brightYellow
       ;
-    inherit (config.desktop) syntax;
+    inherit (config.terminal) syntax;
 
     fg = name: scope: foreground: {
       inherit name scope;
@@ -35,36 +34,56 @@ _: {
       settings = {inherit fontStyle foreground;};
     };
   in {
-    options.desktop.syntaxTheme = lib.mkOption {
-      type = lib.types.path;
-      readOnly = true;
-      description = "syntect theme rendered from desktop.colors and desktop.syntax.";
+    options.terminal.syntax = lib.mkOption {
+      type = lib.types.attrsOf (lib.types.strMatching "#[0-9a-fA-F]{6}");
+      description = "Syntax roles from the editor colorscheme, for highlighters outside it.";
     };
 
-    config.desktop.syntaxTheme = pkgs.writeText "modus-vivendi.tmTheme" (
+    options.terminal.syntaxTheme = lib.mkOption {
+      type = lib.types.path;
+      readOnly = true;
+      description = "syntect theme rendered from terminal.colors and terminal.syntax.";
+    };
+
+    config.terminal.syntax = {
+      comment = "#989898";
+      keyword = "#b6a0ff";
+      function = "#feacd0";
+      builtin = "#f78fe7";
+      string = "#79a8ff";
+      type = "#6ae4b9";
+      identifier = "#00d3d0";
+      number = "#82b0ec";
+      boolean = "#2fafff";
+      preproc = "#ff7f9f";
+      regex = "#00c06f";
+      escape = "#d2b580";
+      heading = "#c6daff";
+    };
+
+    config.terminal.syntaxTheme = pkgs.writeText "modus-vivendi.tmTheme" (
       lib.generators.toPlist {escape = true;} {
         name = "Modus Vivendi";
-        author = "Template: Chris Kempson; scheme: base24 Modus Vivendi";
+        author = "Template: Chris Kempson; palette: Ghostty's Modus Vivendi";
         colorSpaceName = "sRGB";
 
         settings = [
           {
             settings = {
-              background = base00;
-              caret = base05;
-              foreground = base05;
-              invisibles = base03;
-              lineHighlight = base03;
-              selection = base02;
-              gutter = base01;
-              gutterForeground = base03;
+              inherit background foreground;
+              caret = foreground;
+              invisibles = brightBlack;
+              lineHighlight = brightBlack;
+              selection = selectionBackground;
+              gutter = background;
+              gutterForeground = brightBlack;
             };
           }
 
           (fg "Text" "variable.parameter.function" syntax.identifier)
           (emph "Comments" "comment, punctuation.definition.comment" "italic" syntax.comment)
-          (fg "Punctuation" "punctuation.definition.variable, punctuation.definition.parameters, punctuation.definition.array" base05)
-          (fg "Operators" "keyword.operator" base05)
+          (fg "Punctuation" "punctuation.definition.variable, punctuation.definition.parameters, punctuation.definition.array" foreground)
+          (fg "Operators" "keyword.operator" foreground)
           (emph "Keywords" "keyword" "italic" syntax.keyword)
           (fg "Imports" "keyword.control.import, keyword.other.import, meta.preprocessor, keyword.control.directive" syntax.preproc)
           (fg "Variables" "variable" syntax.identifier)
@@ -73,7 +92,7 @@ _: {
           (fg "Functions" "entity.name.function, meta.require, support.function.any-method" syntax.function)
           (fg "Labels" "entity.name.label" syntax.identifier)
           (fg "Classes" "support.class, entity.name.class, entity.name.type.class, entity.name" syntax.type)
-          (fg "Classes" "meta.class" base05)
+          (fg "Classes" "meta.class" foreground)
           (fg "Types" "entity.name.type, support.type" syntax.type)
           (fg "Methods" "keyword.other.special-method" syntax.function)
           (fg "Storage" "storage" syntax.keyword)
@@ -82,7 +101,7 @@ _: {
           (fg "Symbols" "constant.other.symbol" syntax.identifier)
           (fg "Inherited Class" "entity.other.inherited-class" syntax.type)
           (fg "Integers" "constant.numeric" syntax.number)
-          (fg "Constants" "constant" base05)
+          (fg "Constants" "constant" foreground)
           (fg "Language Constants" "constant.language" syntax.builtin)
           (emph "Booleans" "constant.language.boolean" "bold" syntax.boolean)
           (fg "Tags" "entity.name.tag" syntax.identifier)
@@ -91,26 +110,26 @@ _: {
           (fg "Selector" "meta.selector" syntax.keyword)
           (emph "Headings" "markup.heading, punctuation.definition.heading, entity.name.section" "bold" syntax.heading)
           (fg "Units" "keyword.other.unit" syntax.number)
-          (emph "Bold" "markup.bold, punctuation.definition.bold" "bold" base05)
-          (emph "Italic" "markup.italic, punctuation.definition.italic" "italic" base05)
+          (emph "Bold" "markup.bold, punctuation.definition.bold" "bold" foreground)
+          (emph "Italic" "markup.italic, punctuation.definition.italic" "italic" foreground)
           (fg "Code" "markup.raw.inline" syntax.string)
           (fg "Link Text" "string.other.link, punctuation.definition.string.end.markdown, punctuation.definition.string.begin.markdown" syntax.string)
           (fg "Link Url" "meta.link" syntax.type)
           (fg "Quotes" "markup.quote" syntax.comment)
-          (on "Separator" "meta.separator" base02 base05)
-          (fg "Inserted" "markup.inserted" base0B)
-          (fg "Deleted" "markup.deleted" base08)
-          (fg "Changed" "markup.changed" base0A)
+          (on "Separator" "meta.separator" selectionBackground foreground)
+          (fg "Inserted" "markup.inserted" green)
+          (fg "Deleted" "markup.deleted" red)
+          (fg "Changed" "markup.changed" yellow)
           (fg "Colors" "constant.other.color" syntax.number)
           (fg "Regular Expressions" "string.regexp" syntax.regex)
           (fg "Escape Characters" "constant.character.escape" syntax.escape)
-          (fg "Embedded" "punctuation.section.embedded, variable.interpolation" base05)
-          (on "Illegal" "invalid.illegal" base08 base05)
-          (on "Broken" "invalid.broken" base09 base00)
-          (on "Deprecated" "invalid.deprecated" base0F base05)
-          (on "Unimplemented" "invalid.unimplemented" base03 base05)
+          (fg "Embedded" "punctuation.section.embedded, variable.interpolation" foreground)
+          (on "Illegal" "invalid.illegal" red foreground)
+          (on "Broken" "invalid.broken" brightYellow background)
+          (on "Deprecated" "invalid.deprecated" magenta background)
+          (on "Unimplemented" "invalid.unimplemented" brightBlack foreground)
 
-          (fg "Delimiters" "none" base05)
+          (fg "Delimiters" "none" foreground)
           (fg "Floats" "none" syntax.number)
           (fg "Boolean" "none" syntax.boolean)
           (fg "Values" "none" syntax.number)
