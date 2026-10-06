@@ -270,10 +270,6 @@ _: {
           };
         };
 
-        userChrome = ''
-          #firefox-view-button { display: none !important; }
-        '';
-
         settings = {
           "intl.accept_languages" = "en-AU, en";
           "spellchecker.dictionary" = "en-AU";
@@ -395,7 +391,6 @@ _: {
           "full-screen-api.transition-duration.leave" = "0 0";
           "full-screen-api.warning.delay" = -1;
 
-          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
           "browser.download.useDownloadDir" = false;
           "browser.tabs.closeWindowWithLastTab" = false;
           "full-screen-api.warning.timeout" = 0;
