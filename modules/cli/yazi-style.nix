@@ -1,6 +1,6 @@
 _: {
   flake.modules.homeManager.yazi = {config, ...}: let
-    inherit (config.desktop) colors colors16;
+    inherit (config.terminal) colors;
   in {
     programs.yazi.settings = {
       input = {
@@ -32,43 +32,43 @@ _: {
         tab_width = 1;
         syntect_theme = "${config.terminal.syntaxTheme}";
 
-        border_style.fg = colors16.base01;
+        border_style.fg = colors.brightBlack;
 
         find_keyword = {
-          fg = colors16.base0D;
+          fg = colors.blue;
           bold = true;
           italic = false;
           underline = false;
         };
         find_position = {
-          fg = colors.base17;
+          fg = colors.brightMagenta;
           bold = true;
           italic = false;
         };
       };
 
       confirm = {
-        border.fg = colors16.base01;
+        border.fg = colors.brightBlack;
 
         title = {
-          fg = colors16.base03;
+          fg = colors.white;
           bold = true;
         };
 
         btn_yes = {
-          fg = colors.base14;
+          fg = colors.brightGreen;
           bold = true;
         };
-        btn_no.fg = colors.base12;
+        btn_no.fg = colors.brightRed;
         btn_labels = ["  󰄬 Yes  " "  󰅖 No  "];
       };
 
       cmp = {
-        border.fg = colors16.base01;
+        border.fg = colors.brightBlack;
 
         active = {
           reversed = false;
-          bg = colors16.base02;
+          bg = colors.selectionBackground;
         };
 
         icon_file = "󰈔";
@@ -77,9 +77,9 @@ _: {
       };
 
       notify = {
-        title_info.fg = colors16.base0D;
-        title_warn.fg = colors.base13;
-        title_error.fg = colors.base12;
+        title_info.fg = colors.blue;
+        title_warn.fg = colors.brightYellow;
+        title_error.fg = colors.brightRed;
 
         icon_info = "󰋽";
         icon_warn = "󰀪";
@@ -87,55 +87,55 @@ _: {
       };
 
       input = {
-        border.fg = colors16.base01;
+        border.fg = colors.brightBlack;
 
         title = {
-          fg = colors16.base03;
+          fg = colors.white;
           bold = true;
         };
 
         selected = {
           reversed = false;
-          bg = colors16.base02;
+          bg = colors.selectionBackground;
         };
       };
 
       pick = {
-        border.fg = colors16.base01;
+        border.fg = colors.brightBlack;
 
         active = {
-          fg = colors16.base05;
-          bg = colors16.base02;
+          fg = colors.foreground;
+          bg = colors.selectionBackground;
           bold = true;
         };
       };
 
       spot = {
-        border.fg = colors16.base01;
+        border.fg = colors.brightBlack;
 
         title = {
-          fg = colors16.base03;
+          fg = colors.white;
           bold = true;
         };
       };
 
       tasks = {
-        border.fg = colors16.base01;
+        border.fg = colors.brightBlack;
 
         title = {
-          fg = colors16.base03;
+          fg = colors.white;
           bold = true;
         };
 
         hovered = {
-          fg = colors16.base05;
-          bg = colors16.base02;
+          fg = colors.foreground;
+          bg = colors.selectionBackground;
         };
       };
 
       help.hovered = {
         reversed = false;
-        bg = colors16.base02;
+        bg = colors.selectionBackground;
         bold = true;
       };
 
@@ -147,47 +147,47 @@ _: {
 
         current = {
           reversed = false;
-          bg = colors16.base02;
+          bg = colors.selectionBackground;
         };
 
         parent = {
           reversed = false;
-          bg = colors16.base01;
+          bg = colors.brightBlack;
         };
 
         preview = {
           underline = false;
-          bg = colors16.base01;
+          bg = colors.brightBlack;
         };
       };
 
       mode = {
         normal_main = {
-          fg = colors16.base00;
-          bg = colors16.base0D;
+          fg = colors.background;
+          bg = colors.blue;
           bold = true;
         };
         normal_alt = {
-          fg = colors16.base0D;
-          bg = colors16.base00;
+          fg = colors.blue;
+          bg = colors.background;
         };
         select_main = {
-          fg = colors16.base00;
-          bg = colors16.base0B;
+          fg = colors.background;
+          bg = colors.green;
           bold = true;
         };
         select_alt = {
-          fg = colors16.base0B;
-          bg = colors16.base00;
+          fg = colors.green;
+          bg = colors.background;
         };
         unset_main = {
-          fg = colors16.base00;
-          bg = colors16.base08;
+          fg = colors.background;
+          bg = colors.red;
           bold = true;
         };
         unset_alt = {
-          fg = colors16.base08;
-          bg = colors16.base00;
+          fg = colors.red;
+          bg = colors.background;
         };
       };
 
@@ -202,11 +202,11 @@ _: {
         };
 
         progress_normal = {
-          fg = colors16.base0D;
+          fg = colors.blue;
           bg = "reset";
         };
         progress_error = {
-          fg = colors16.base08;
+          fg = colors.red;
           bg = "reset";
         };
       };
