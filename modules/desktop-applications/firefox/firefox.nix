@@ -313,12 +313,7 @@ _: {
           "breakpad.reportURL" = "";
           "browser.tabs.crashReporting.sendReport" = false;
 
-          "widget.use-xdg-desktop-portal.file-picker" = 2;
-          "widget.use-xdg-desktop-portal.mime-handler" = 1;
-
-          "gfx.font_rendering.fontconfig.max_generic_substitutions" = 127;
           "gfx.font_rendering.opentype_svg.enabled" = false;
-          "font.name-list.emoji" = "emoji";
 
           "general.autoScroll" = true;
           "apz.autoscroll.enabled" = false;
@@ -330,7 +325,6 @@ _: {
           "general.smoothScroll.msdPhysics.slowdownMinDeltaMS" = 12;
           "general.smoothScroll.msdPhysics.slowdownMinDeltaRatio" = 1.3;
           "general.smoothScroll.msdPhysics.slowdownSpringConstant" = 250;
-          "apz.gtk.kinetic_scroll.enabled" = false;
 
           "network.http.max-persistent-connections-per-server" = 10;
           "network.http.max-urgent-start-excessive-connections-per-host" = 5;
@@ -360,7 +354,6 @@ _: {
           "browser.urlbar.unitConversion.enabled" = true;
           "findbar.highlightAll" = true;
 
-          "browser.quitShortcut.disabled" = true;
           "browser.sessionstore.interval" = 60000;
           "browser.aboutConfig.showWarning" = false;
           "browser.download.manager.addToRecentDocs" = false;

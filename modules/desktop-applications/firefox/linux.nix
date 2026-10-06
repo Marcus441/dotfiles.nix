@@ -23,5 +23,14 @@ _: {
       };
 
       programs.firefox.configPath = "${config.xdg.configHome}/mozilla/firefox";
+
+      programs.firefox.profiles.default.settings = {
+        "widget.use-xdg-desktop-portal.file-picker" = 2;
+        "widget.use-xdg-desktop-portal.mime-handler" = 1;
+        "gfx.font_rendering.fontconfig.max_generic_substitutions" = 127;
+        "font.name-list.emoji" = "emoji";
+        "apz.gtk.kinetic_scroll.enabled" = false;
+        "browser.quitShortcut.disabled" = true;
+      };
     };
 }
