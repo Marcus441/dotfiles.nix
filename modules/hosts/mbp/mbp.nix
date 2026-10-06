@@ -20,6 +20,7 @@ in {
 
   flake.modules.homeManager.mbp = {
     terminal.font.terminalSize = 24;
+    terminal.font.ligatures = false;
     imports = with inputs.self.modules.homeManager; [
       core
       zsh
