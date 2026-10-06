@@ -1,26 +1,23 @@
 _: {
   flake.modules.homeManager.core = {
-    config,
     lib,
     pkgs,
     ...
   }: let
-    inherit (config.desktop) colorsRgb;
     esc = builtins.fromJSON ''"\u001b"'';
+    sgr = params: "${esc}[${params}m";
   in {
     home.packages = [pkgs.man-pages-posix] ++ lib.optional pkgs.stdenv.hostPlatform.isLinux pkgs.man-pages;
 
     home.sessionVariables = {
       GROFF_NO_SGR = 1;
-      LESS_TERMCAP_mb = "${esc}[1;38;2;${colorsRgb.base08}m";
-      LESS_TERMCAP_md = "${esc}[1;38;2;${colorsRgb.base08}m";
-      LESS_TERMCAP_me = "${esc}[0m";
-      LESS_TERMCAP_so = "${esc}[38;2;${colorsRgb.base00}m${esc}[48;2;${colorsRgb.base0A}m";
-      LESS_TERMCAP_se = "${esc}[0m";
-      LESS_TERMCAP_us = "${esc}[4;1;38;2;${colorsRgb.base0B}m";
-      LESS_TERMCAP_ue = "${esc}[0m";
-      LESS_TERMCAP_mr = "${esc}[7m";
-      LESS_TERMCAP_mh = "${esc}[2m";
+      LESS_TERMCAP_mb = sgr "1;32";
+      LESS_TERMCAP_md = sgr "1;32";
+      LESS_TERMCAP_me = sgr "0";
+      LESS_TERMCAP_so = sgr "01;33";
+      LESS_TERMCAP_se = sgr "0";
+      LESS_TERMCAP_us = sgr "1;4;31";
+      LESS_TERMCAP_ue = sgr "0";
     };
   };
 }
