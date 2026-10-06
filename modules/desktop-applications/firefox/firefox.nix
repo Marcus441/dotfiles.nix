@@ -61,45 +61,6 @@ _: {
             installation_mode = "normal_installed";
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/australian-english-dictionary/latest.xpi";
           };
-          "uBlock0@raymondhill.net" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-          };
-
-          "sponsorBlocker@ajay.app" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/sponsorblock/latest.xpi";
-          };
-
-          "{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/refined-github-/latest.xpi";
-          };
-
-          "{85860b32-02a8-431a-b2b1-40fbd64c9c69}" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/github-file-icons/latest.xpi";
-          };
-
-          "search@kagi.com" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/kagi-search-for-firefox/latest.xpi";
-          };
-
-          "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
-          };
-
-          "addon@darkreader.org" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
-          };
-
-          "@testpilot-containers" = {
-            installation_mode = "normal_installed";
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/multi-account-containers/latest.xpi";
-          };
         };
 
         "3rdparty".Extensions."uBlock0@raymondhill.net".adminSettings.selectedFilterLists = [

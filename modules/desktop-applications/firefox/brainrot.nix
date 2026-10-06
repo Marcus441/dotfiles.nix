@@ -1,22 +1,10 @@
-_:
+{ inputs, ... }:
 let
   shorts = "https://raw.githubusercontent.com/gijsdev/ublock-hide-yt-shorts/master/list.txt";
 in
 {
   flake.modules.homeManager.firefox = {
     programs.firefox.policies = {
-      ExtensionSettings = {
-        "deArrow@ajay.app" = {
-          installation_mode = "normal_installed";
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/dearrow/latest.xpi";
-        };
-
-        "{762f9885-5a13-4abd-9c77-433dcd38b8fd}" = {
-          installation_mode = "normal_installed";
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/return-youtube-dislikes/latest.xpi";
-        };
-      };
-
       "3rdparty".Extensions."uBlock0@raymondhill.net".adminSettings = {
         selectedFilterLists = [ shorts ];
 
@@ -33,4 +21,16 @@ in
       };
     };
   };
+
+  flake.modules.homeManager.firefox-profile =
+    { pkgs, ... }:
+    let
+      addons = inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system};
+    in
+    {
+      programs.firefox.profiles.default.extensions.packages = [
+        addons.dearrow
+        addons.return-youtube-dislikes
+      ];
+    };
 }
