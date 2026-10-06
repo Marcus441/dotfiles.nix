@@ -7,18 +7,13 @@ _: {
   }: let
     cfg = config.dwl;
 
-    configH = pkgs.writeText "dwl-config.h" (import ./_config-h.nix {inherit config lib pkgs;});
-
-    dwl = pkgs.dwl.overrideAttrs (old: {
-      patches = (old.patches or []) ++ cfg.patches;
-      buildInputs = (old.buildInputs or []) ++ cfg.buildInputs;
-
-      postPatch =
-        (old.postPatch or "")
-        + ''
-          cp ${configH} config.h
-        '';
-    });
+    dwl =
+      (pkgs.dwl.override {
+        configH = import ./_config-h.nix {inherit config lib pkgs;};
+      }).overrideAttrs (old: {
+        patches = (old.patches or []) ++ cfg.patches;
+        buildInputs = (old.buildInputs or []) ++ cfg.buildInputs;
+      });
 
     autostart =
       pkgs.writeShellScript "dwl-autostart"
