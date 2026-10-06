@@ -7,12 +7,12 @@ in
     programs.firefox.policies = {
       ExtensionSettings = {
         "deArrow@ajay.app" = {
-          installation_mode = "force_installed";
+          installation_mode = "normal_installed";
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/dearrow/latest.xpi";
         };
 
         "{762f9885-5a13-4abd-9c77-433dcd38b8fd}" = {
-          installation_mode = "force_installed";
+          installation_mode = "normal_installed";
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/return-youtube-dislikes/latest.xpi";
         };
       };
