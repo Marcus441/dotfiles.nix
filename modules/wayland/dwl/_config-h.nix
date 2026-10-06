@@ -7,10 +7,8 @@
   ocr-copy = pkgs.callPackage ../_pkgs/ocr-copy.nix {};
   screenshot = pkgs.callPackage ../_pkgs/screenshot.nix {};
 
-  inherit (config.desktop) colors font;
+  inherit (config.desktop) font;
   hasBar = config.dwl.bar;
-
-  toBar = hex: "0x" + lib.toLower (lib.removePrefix "#" hex) + "ff";
 
   wpctl = "${pkgs.wireplumber}/bin/wpctl";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
@@ -27,15 +25,20 @@
     then ''
       /* foreground, background, border */
       static uint32_t colors[][3] = {
-        [SchemeNorm] = { ${toBar colors.base05}, ${toBar colors.base00}, ${toBar colors.base01} },
-        [SchemeSel]  = { ${toBar colors.base0D}, ${toBar colors.base00}, ${toBar colors.base0D} },
-        [SchemeUrg]  = { ${toBar colors.base00}, ${toBar colors.base08}, ${toBar colors.base08} },
+        [SchemeNorm] = { 0xbbbbbbff, 0x222222ff, 0x444444ff },
+        [SchemeSel]  = { 0xeeeeeeff, 0x005577ff, 0x005577ff },
+        [SchemeUrg]  = { 0,          0,          0x770000ff },
       };''
     else ''
       /* unfocused, focused, urgent */
-      static const float bordercolor[]           = COLOR(${toBar colors.base01});
-      static const float focuscolor[]            = COLOR(${toBar colors.base0D});
-      static const float urgentcolor[]           = COLOR(${toBar colors.base08});'';
+      static const float bordercolor[]           = COLOR(0x444444ff);
+      static const float focuscolor[]            = COLOR(0x005577ff);
+      static const float urgentcolor[]           = COLOR(0xff0000ff);'';
+
+  rootcolor =
+    if hasBar
+    then "0x000000ff"
+    else "0x222222ff";
 
   tagging =
     if hasBar
@@ -78,7 +81,7 @@ in ''
   static const int sloppyfocus                               = 1;  /* focus follows mouse */
   static const int bypass_surface_visibility                 = 0;
   static const unsigned int borderpx                         = 1;  /* border pixel of windows */
-  ${barAppearance}static const float rootcolor[]             = COLOR(${toBar colors.base00});
+  ${barAppearance}static const float rootcolor[]             = COLOR(${rootcolor});
   /* Set the alpha to zero to restore the old (pre xdg-protocol) behaviour. */
   static const float fullscreen_bg[]                         = {0.0f, 0.0f, 0.0f, 1.0f};
 
