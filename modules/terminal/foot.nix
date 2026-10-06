@@ -4,7 +4,7 @@ _: {
     lib,
     ...
   }: let
-    inherit (config.desktop) ansi colors16;
+    inherit (config.terminal) ansi colors;
     inherit (config.terminal) font;
     fontAt = size: let
       fonts =
@@ -39,16 +39,13 @@ _: {
 
         colors-dark =
           {
-            foreground = strip colors16.base05;
-            background = strip colors16.base00;
+            foreground = strip colors.foreground;
+            background = strip colors.background;
 
-            cursor = "${strip colors16.base00} ${strip colors16.base05}";
+            cursor = "${strip colors.cursorText} ${strip colors.cursor}";
 
-            selection-foreground = strip colors16.base06;
-            selection-background = strip colors16.base02;
-
-            "16" = strip colors16.base09;
-            "17" = strip colors16.base0F;
+            selection-foreground = strip colors.selectionForeground;
+            selection-background = strip colors.selectionBackground;
           }
           // lib.listToAttrs (lib.imap0 (
               i: hex:
