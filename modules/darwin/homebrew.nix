@@ -12,7 +12,6 @@ _: {
       casks = [
         "1password"
         "bitwarden"
-        "firefox"
         "microsoft-teams"
         "notion"
         "raycast"
