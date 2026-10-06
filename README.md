@@ -71,7 +71,7 @@ closed, via:
 
 ```bash
 nix build .#firefox-profile
-cp -L result/* ~/Library/Application\ Support/Firefox/Profiles/<profile>/
+cp -RL result/* ~/Library/Application\ Support/Firefox/Profiles/<profile>/
 ```
 
 Hosts import aspects flat. flake-parts does not deduplicate modules, so an
