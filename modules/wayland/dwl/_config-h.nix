@@ -83,6 +83,7 @@ in
   static const int sloppyfocus                               = 1;  /* focus follows mouse */
   static const int bypass_surface_visibility                 = 0;
   static const unsigned int borderpx                         = 1;  /* border pixel of windows */
+  static const unsigned int snap                             = 32; /* snap pixel */
   ${barAppearance}static const float rootcolor[]             = COLOR(${rootcolor});
   /* Set the alpha to zero to restore the old (pre xdg-protocol) behaviour. */
   static const float fullscreen_bg[]                         = {0.0f, 0.0f, 0.0f, 1.0f};
@@ -220,11 +221,16 @@ in
     /* --- lock, exit & VT switching --- */
     { MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_x, spawn, SHCMD("loginctl lock-session") }, /* super+shift+x -> lock */
     { MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_z, quit, {0} },                             /* super+shift+z -> exit dwl */
-    { WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT, XKB_KEY_Terminate_Server, quit, {0} },
-    #define CHVT(n) { WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT, XKB_KEY_XF86Switch_VT_##n, chvt, {.ui = (n)} }
+    { WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT, XKB_KEY_BackSpace, quit, {0} },
+    #define CHVT(n) { WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT, XKB_KEY_F##n, chvt, {.ui = (n)} }
     CHVT(1), CHVT(2), CHVT(3), CHVT(4),  CHVT(5),  CHVT(6),
     CHVT(7), CHVT(8), CHVT(9), CHVT(10), CHVT(11), CHVT(12),
   };
 
   ${buttons}
+
+  static const Axis axes[] = {
+    { MODKEY, AxisUp,   spawn, {.v = volupcmd} },
+    { MODKEY, AxisDown, spawn, {.v = voldncmd} },
+  };
 ''
