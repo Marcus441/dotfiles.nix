@@ -82,15 +82,15 @@ in
       yazi
     ];
 
-    desktop.font.terminalSize = 24;
-    terminal.font.terminalSize = 24;
+    terminal.font.terminalSize = 20;
 
     desktop.monitors = [
       {
-        name = "DP-11";
-        width = 3840;
-        height = 2160;
-        refresh = 120;
+        name = "DP-1";
+        width = 5120;
+        height = 2880;
+        scale = 2;
+        refresh = 144.051;
       }
     ];
   };
