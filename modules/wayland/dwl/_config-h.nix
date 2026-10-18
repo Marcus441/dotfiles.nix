@@ -116,8 +116,8 @@ in
     .options = NULL,
   };
 
-  static const int repeat_rate  = 25;
-  static const int repeat_delay = 600;
+  static const int repeat_rate  = 33;
+  static const int repeat_delay = 225;
 
   static const int tap_to_click            = 1;
   static const int tap_and_drag            = 1;
