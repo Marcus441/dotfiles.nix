@@ -18,11 +18,7 @@ _: {
             " Find next:"
             " Find previous:"
           ];
-          search_title = " Search via {n}:";
-          shell_title = [
-            " Shell:"
-            " Shell (block):"
-          ];
+          search_title = "  Search via {n}:";
         };
 
         confirm = {
