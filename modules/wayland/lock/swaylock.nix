@@ -24,7 +24,6 @@ _: {
         enable = true;
         settings = {
           font = font.name;
-          font-size = font.terminalSize;
 
           indicator-radius = 100;
           indicator-thickness = 8;
