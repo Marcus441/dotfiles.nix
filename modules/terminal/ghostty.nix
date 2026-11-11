@@ -61,7 +61,7 @@ _: {
           theme = "Modus Vivendi";
         }
         // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
-          macos-option-as-alt = "left";
+          macos-option-as-alt = "true";
           macos-titlebar-style = "transparent";
           window-save-state = "always";
           auto-update = "off";
