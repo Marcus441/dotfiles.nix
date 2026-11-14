@@ -38,17 +38,18 @@ _: {
 
           shell-integration-features = "sudo,ssh-env,ssh-terminfo";
 
+          # Keybinds are for macOS currently
           keybind = [
-            "ctrl+alt+h=goto_split:left"
-            "ctrl+alt+j=goto_split:down"
-            "ctrl+alt+k=goto_split:up"
-            "ctrl+alt+l=goto_split:right"
+            "super+left=goto_split:left"
+            "super+down=goto_split:down"
+            "super+up=goto_split:up"
+            "super+right=goto_split:right"
 
-            "ctrl+super+h=resize_split:left,40"
-            "ctrl+super+j=resize_split:down,40"
-            "ctrl+super+k=resize_split:up,40"
-            "ctrl+super+l=resize_split:right,40"
-            "ctrl+alt+equal=equalize_splits"
+            "shift+super+h=resize_split:left,40"
+            "shift+super+j=resize_split:down,40"
+            "shift+super+k=resize_split:up,40"
+            "shift+super+l=resize_split:right,40"
+            "super+.=equalize_splits"
           ]
           ++ lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin [
             "global:super+backquote=toggle_quick_terminal"
